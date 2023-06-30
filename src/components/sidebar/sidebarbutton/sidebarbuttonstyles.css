@@ -1,0 +1,30 @@
+.SidebarButton {
+    border: 2px solid rgb(178, 178, 180);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 0.4vw);
+    height: 40px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    background-color: rgb(38, 38, 40);
+    text-align: center;
+    user-select: none;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.SidebarButton:hover {
+    background-color: rgb(80, 18, 96);
+    color: rgb(173, 53, 203);
+    border-color: rgb(173, 53, 203);
+}
+
+.SidebarButton.Selected {
+    background-color: rgb(7, 83, 49);
+    color: rgb(15, 220, 128);
+    border-color: rgb(15, 220, 128);
+}
+  

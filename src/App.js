@@ -1,23 +1,25 @@
-import logo from './logo.svg';
+// style import
 import './App.css';
+
+// script imports
+import './scripts/player/sessioninventory.tsx';
+import './scripts/mechanics/inventorylogic.tsx';
+
+// (test script imports)
+import './scripts/player/testingscript.tsx';
+
+// component imports
+import Header from './components/header/header.tsx';
+import Sidebar from './components/sidebar/sidebar.tsx';
+import Subpage from './components/subpage/subpage.tsx';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+       <Header />
+       <Sidebar />
+       <Subpage />
     </div>
   );
 }

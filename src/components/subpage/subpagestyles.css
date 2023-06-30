@@ -1,0 +1,18 @@
+.Subpage {
+  display: block;
+  float: left;
+  background-color: rgb(18, 18, 20);
+  width: calc(100vw - 180px);
+  height: calc(100vh - 70px);
+  text-align: left;
+  overflow-y: scroll;
+}
+
+.ContentDefault {
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ContentDefault.show {
+  opacity: 1;
+}

@@ -1,0 +1,27 @@
+Start: June 7, 2023
+
+Day 1: Created a new app, reset all formatting made by React, made a header, reassigned the css for the body, and made a folder structure for easy organization.
+
+Day 2: More components like sidebar and sidebar buttons, but mostly fixing dependencies through bad signal wifi.
+
+Day 4: Added some more dependencies, added css animations for sidebar, added proper sidebar button functionality and page switching. Added inventory saving and loading using localStorage as well as parsing and stringifying. Created other scripts for the default inventory, the default save file, and the inventory handler. 
+
+Day 5: Fixed some bugs on the functionality of saving and loading of objects in localStorage. Fixed functions in regards to loading, saving and cloning saves. Started working on the inventory of the player. Tabs have now a short animation. Added icons for weapons, armors, and food, and added respective UI.
+
+Day 5 part 2: Converted JS to TSX for better functionality, linked session inventory to the player inventory tab, added more on information div, and made inventory level dictate amount of inventory slots the user has. Also design changes.
+
+Day 6: Added more interfaces, added proper inventory slot functionality, added more dictionaries to retrieve information for tasks and stuff.
+
+Day 7: Added backpack UI rendering, removed the background image for slots temporarily, changed hover properties, added interface for tooltips soon.
+
+Day 7 part 2: Added some code for tooltips as well as design, need to fix some bugs before adding tools and item selection.
+
+Day 8: Completed tooltip but have not yet fixed it fully, added a new necklace dictionary, and some properties for items and such fixes. Fixed the coloring of the inventory icons. Tooltip has proper formatting, and displays most of the information (aside from a few I excluded). 
+
+Day 10: Removed the idea of updating the items + item security checks by changing the system of item rendering from the dictionary (from cloning the item straight from dictionary -> referring the item to the dictionary using the ID and giving a single property to the inventory for editing the amount. That way, it has less maintenance and better optimization for the long term). After doing so, I splitted inventorylogic module and sessioninventory module for better management, as well as fixed some code that came along the changes with the splitting of modules and item rendering changes.
+
+Day 15: (Developer is back from family domestic vacation) Laid the foundation for the new section in the inventory for tools, as well as fixed the defaultinventory + inventoryprops by adding more specific prop requirements for each slot (e.g. Fishing Tool needs to be a) an item with ToolProps and b) have taskType be TaskType.Fishing).
+
+Day 16: Implemented the tool row where the players can equip different tools, started working on the slot menu for equipping, deleting and usage (if possible depending on the item). 
+
+Day 22: Added CSS for selected backpack slots, and implemented base UI for the slot menu.
