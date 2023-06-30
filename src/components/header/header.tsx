@@ -4,7 +4,7 @@ import "./headerstyles.css";
 const Header = () => {
   return (
     <div className="Header">
-      <div className="HeaderTitle">Migoic Systems</div>Zoom out if necessary!
+      <div className="HeaderTitle">Test Mechanics</div>Zoom out if necessary!
     </div>
   );
 };
