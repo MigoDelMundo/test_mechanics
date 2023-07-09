@@ -35,3 +35,10 @@
   background-color: rgb(7, 83, 49);
   color: white;
 }
+
+.button.locked {
+  cursor: not-allowed;
+  background-color: rgb(43, 13, 6);
+  border-color: rgb(78, 23, 10);
+  color: rgb(248, 75, 32);
+}

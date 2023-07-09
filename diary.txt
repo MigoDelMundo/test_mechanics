@@ -25,3 +25,21 @@ Day 15: (Developer is back from family domestic vacation) Laid the foundation fo
 Day 16: Implemented the tool row where the players can equip different tools, started working on the slot menu for equipping, deleting and usage (if possible depending on the item). 
 
 Day 22: Added CSS for selected backpack slots, and implemented base UI for the slot menu.
+
+Day 23: Complete slot menu which appears as a UI bottom right instead of being relative to the slot menu. Fixed some bugs in regards to playerinventory.tsx, as well as some optimizations. Added a 'main save' system which is the umbrella object that includes inventory as well as some other features, and added many useful functions.
+
+Day 24: Completed the main save system and made it functional, as well as a lot of bug fixes and optimizations focused on playerinventory. Added a feature to equip armor (for now, no weapon food or tools). Did some design changes in regards to the armor UI. Armor can now be equipped and swapped if the player has already an equipped piece of armor. Added a sorting function that occupies the space in the backpack for organization.
+
+Day 25: Code optimizations on playerInventory, and some design changes as well. Fixed some bugs in regards to equipping, will add deequipping soon enough. Also added a developer map in Notion so that I don't have to remember all the 9999 things I need to note of in order to make the game working lol + for time management (I'll only be tackling around 1-5 features or bugs depending on the time it takes to complete one)
+
+Day 26: Added proper rarity tiers (temporarily 1-5), and added wooden tier items for tools [axe, hoe, pickaxe, crook, basket, fishing rod, smithing kit, cooking kit] as well as stone tier items for tools [axe, hoe, pickaxe, fishing rod, crook, smithing kit, crafting kit]. Change some of the names of the subpages as well.
+
+Day 28: Reedited equipping armors, updated a lot of interfaces for self-referencing mainly and specifications such as armor taking ArmorSlotProps. Also fixed a loading issue that occurs which breaks the inventory of the player as a whole. Successfully added some self referencing parameters (Idk what im totally saying here) and updated resource name in inventory.
+
+Day 29: Fixed bug on inventory UI which caused the player to have all 3 weapon/food slots visible even though their max food or max weapons is below 3. Fixed a game breaking bug that made the player click the wrong slot when equipping/deeequipping armors. Armor pieces can now be freely equipped and removed from equipped armor or backpack slots. Tools are also updated so that they have their own slotProps, meaning they function similar to armors and backpack slots. They will be prioritized first due to the gameplay introducing tools as one of the key elements.
+
+Day 30: Added equipping and deequipping of tools. Added tool-specific granting function (to be used for crafting soon) as well as armor-specific. Added new dictionaries for Shield-type weapons and Sword-type weapons.
+
+Day 31: Added Proficiency - a stat of the player that dictates how much skill the player has under one certain type of task. All tasks are given proficiencies, and all proficiencies have their own values. Removed subtab animations temporarily and starting working on the ItemIndex.
+
+Day 32: Removed itemIndex, replaced it with a information page to display stats of the player. Change the order of the sidebar tabs as well as the default tab to be displayed. Proficiency level can now be viewed upon looking at the Adventurer Tab. Pushed the commit once again to launch update 2.

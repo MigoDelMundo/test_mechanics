@@ -1,0 +1,55 @@
+.AdventurerHeader {
+  padding: 10px;
+  margin-top: 1vh;
+  width: calc(100% - 20px);
+  height: 3vh;
+  display: flex;
+  align-items: center;
+}
+
+.AdventurerHeader span {
+  font-size: 2vw;
+}
+
+.AdventurerGrid {
+  width: calc(100% - 20px);
+  height: 70vh;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 40% 30% 30%;
+  grid-template-rows: auto;
+  column-gap: 5px;
+  row-gap: 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.AdventurerGridCell {
+  margin: 10px;
+  padding: 10px;
+  border: 3px solid rgb(178, 178, 180);
+  border-radius: 10px;
+  font-size: 13.5px;
+  overflow-y: scroll;
+  line-height: 1.5;
+}
+
+.AdventurerGridCell .title {
+  font-size: 22px;
+  color: rgb(255, 219, 40);
+  font-weight: bold;
+}
+
+.AdventurerGridCell .stat {
+  font-weight: bold;
+}
+
+.AdventurerGridCell .info {
+  font-weight: bold;
+  color: rgb(29, 152, 111);
+}
+
+.AdventurerGridCell .additionalinformation {
+  font-style: italic;
+  color: rgb(102, 102, 102);
+}

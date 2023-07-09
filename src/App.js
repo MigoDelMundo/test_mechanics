@@ -2,8 +2,7 @@
 import './App.css';
 
 // script imports
-import './scripts/player/sessioninventory.tsx';
-import './scripts/mechanics/inventorylogic.tsx';
+import './scripts/mechanics/mainsavelogic.tsx'
 
 // (test script imports)
 import './scripts/player/testingscript.tsx';

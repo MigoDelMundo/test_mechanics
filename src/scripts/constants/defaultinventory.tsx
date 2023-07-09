@@ -1,11 +1,12 @@
+import { ArmorTypes, TaskTypes } from "./enumerations";
 import { InventoryProps } from "./interfaces/inventoryprops";
 
 const defaultInventory: InventoryProps = {
   properties: {
-    canEquipArmor: false,
-    canEquipWeapons: false,
-    canEquipFood: false,
-    inventoryLevel: 1,
+    canEquipArmor: true,
+    canEquipWeapons: true,
+    canEquipFood: true,
+    inventoryLevel: 5,
     maxFood: 1,
     maxWeapons: 1,
     get inventorySlots() {
@@ -14,14 +15,38 @@ const defaultInventory: InventoryProps = {
   },
   backpack: [],
   armor: {
-    helmet: null,
-    chestplate: null,
-    leggings: null,
-    boots: null,
-    necklace: null,
-    bracelet: null,
-    leftring: null,
-    rightring: null,
+    helmet: { slotFor: ArmorTypes.Helmet, dictionaryID: null, amount: 0 },
+    chestplate: {
+      slotFor: ArmorTypes.Chestplate,
+      dictionaryID: null,
+      amount: 0,
+    },
+    leggings: {
+      slotFor: ArmorTypes.Leggings,
+      dictionaryID: null,
+      amount: 0,
+    },
+    boots: { slotFor: ArmorTypes.Boots, dictionaryID: null, amount: 0 },
+    necklace: {
+      slotFor: ArmorTypes.Necklace,
+      dictionaryID: null,
+      amount: 0,
+    },
+    bracelet: {
+      slotFor: ArmorTypes.Bracelet,
+      dictionaryID: null,
+      amount: 0,
+    },
+    leftring: {
+      slotFor: ArmorTypes.LeftRing,
+      dictionaryID: null,
+      amount: 0,
+    },
+    rightring: {
+      slotFor: ArmorTypes.RightRing,
+      dictionaryID: null,
+      amount: 0,
+    },
   },
   equippedFood: {
     firstFood: null,
@@ -34,24 +59,47 @@ const defaultInventory: InventoryProps = {
     thirdWeapon: null,
   },
   equippedTools: {
-    woodchoppingTool: null,
-    farmingTool: null,
-    miningTool: null,
-    herbGatheringTool: null,
-    livestockTendingTool: null,
-    fishingTool: null,
-    cookingTool: null,
-    smeltingTool: null,
-    craftingTool: null,
-    metalcraftingTool: null,
-    researchingTool: null,
+    woodchopping: {
+      slotFor: TaskTypes.Woodchopping,
+      dictionaryID: null,
+      amount: 0,
+    },
+    farming: { slotFor: TaskTypes.Farming, dictionaryID: null, amount: 0 },
+    mining: { slotFor: TaskTypes.Mining, dictionaryID: null, amount: 0 },
+    herbGathering: {
+      slotFor: TaskTypes.HerbGathering,
+      dictionaryID: null,
+      amount: 0,
+    },
+    livestockTending: {
+      slotFor: TaskTypes.LivestockTending,
+      dictionaryID: null,
+      amount: 0,
+    },
+    fishing: { slotFor: TaskTypes.Fishing, dictionaryID: null, amount: 0 },
+    cooking: { slotFor: TaskTypes.Cooking, dictionaryID: null, amount: 0 },
+    crafting: { slotFor: TaskTypes.Crafting, dictionaryID: null, amount: 0 },
+    metalcrafting: {
+      slotFor: TaskTypes.Metalcrafting,
+      dictionaryID: null,
+      amount: 0,
+    },
+    researching: {
+      slotFor: TaskTypes.Researching,
+      dictionaryID: null,
+      amount: 0,
+    },
   },
 };
 
 // render backpack
 defaultInventory.backpack = Array.from(
   { length: defaultInventory.properties.inventorySlots },
-  () => ({ dictionaryID: null, amount: 0 })
+  (x, index) => ({
+    slotID: index,
+    dictionaryID: null,
+    amount: 0,
+  })
 );
 
 // preloaded items

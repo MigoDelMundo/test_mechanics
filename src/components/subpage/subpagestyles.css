@@ -6,13 +6,15 @@
   height: calc(100vh - 70px);
   text-align: left;
   overflow-y: scroll;
-}
-
-.ContentDefault {
   opacity: 0;
-  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeIn 0.2s ease-in forwards;
 }
 
-.ContentDefault.show {
-  opacity: 1;
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

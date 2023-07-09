@@ -1,7 +1,8 @@
-import { BackpackSlotProps } from "./backpackslotprops";
-import { TaskTypes, ToolProps } from "./itemprops";
+import { TaskTypes } from "../enumerations";
+import { ArmorSlotProps, SlotProps, ToolSlotProps } from "./slotprops";
+import { ArmorProps, ToolProps } from "./itemprops";
 
-interface InventoryProps {
+export interface InventoryProps {
   properties: {
     canEquipArmor: boolean;
     canEquipWeapons: boolean;
@@ -11,16 +12,16 @@ interface InventoryProps {
     maxWeapons: number;
     readonly inventorySlots: number;
   };
-  backpack: BackpackSlotProps[];
+  backpack: SlotProps[];
   armor: {
-    helmet: any;
-    chestplate: any;
-    leggings: any;
-    boots: any;
-    necklace: any;
-    bracelet: any;
-    leftring: any;
-    rightring: any;
+    helmet: ArmorSlotProps;
+    chestplate: ArmorSlotProps;
+    leggings: ArmorSlotProps;
+    boots: ArmorSlotProps;
+    necklace: ArmorSlotProps;
+    bracelet: ArmorSlotProps;
+    leftring: ArmorSlotProps;
+    rightring: ArmorSlotProps;
   };
   equippedFood: {
     firstFood: any;
@@ -33,29 +34,16 @@ interface InventoryProps {
     thirdWeapon: any;
   };
   equippedTools: {
-    woodchoppingTool:
-      | (ToolProps & { taskType: typeof TaskTypes.Woodchopping })
-      | null;
-    farmingTool: (ToolProps & { taskType: typeof TaskTypes.Farming }) | null;
-    miningTool: (ToolProps & { taskType: typeof TaskTypes.Mining }) | null;
-    herbGatheringTool:
-      | (ToolProps & { taskType: typeof TaskTypes.HerbGathering })
-      | null;
-    livestockTendingTool:
-      | (ToolProps & { taskType: typeof TaskTypes.LivestockTending })
-      | null;
-    fishingTool: (ToolProps & { taskType: typeof TaskTypes.Fishing }) | null;
-    cookingTool: (ToolProps & { taskType: typeof TaskTypes.Cooking }) | null;
-    smeltingTool: (ToolProps & { taskType: typeof TaskTypes.Smelting }) | null;
-    craftingTool: (ToolProps & { taskType: typeof TaskTypes.Crafting }) | null;
-    metalcraftingTool:
-      | (ToolProps & { taskType: typeof TaskTypes.Metalcrafting })
-      | null;
-    researchingTool:
-      | (ToolProps & { taskType: typeof TaskTypes.Researching })
-      | null;
+    woodchopping: ToolSlotProps;
+    farming: ToolSlotProps;
+    mining: ToolSlotProps;
+    herbGathering: ToolSlotProps;
+    livestockTending: ToolSlotProps;
+    fishing: ToolSlotProps;
+    cooking: ToolSlotProps;
+    crafting: ToolSlotProps;
+    metalcrafting: ToolSlotProps;
+    researching: ToolSlotProps;
   };
   // TO BE ADDED YEEE
 }
-
-export { InventoryProps };

@@ -3,12 +3,9 @@ import { stringify } from "flatted";
 
 import "./playerinventorystyles.css";
 
-import { sessionInventory } from "../../../scripts/player/sessioninventory.tsx";
-import {
-  ItemProps,
-  ToolProps,
-} from "../../../scripts/constants/interfaces/itemprops.ts";
+import { ItemProps } from "../../../scripts/constants/interfaces/itemprops.ts";
 import DictionaryArray from "../../../scripts/dictionaries/dictionariesarray.tsx";
+import { sessionMainSave } from "../../../scripts/player/sessionmainsave.tsx";
 
 import Tooltip from "./tooltip/tooltip.tsx";
 import SlotMenu from "./slotmenu/slotmenu.tsx";
@@ -16,12 +13,19 @@ import SlotMenu from "./slotmenu/slotmenu.tsx";
 // notes: icons color is rgb(38, 38, 40)
 // icon lines is 3px wide
 
-const PlayerInventory: React.FC = () => {
+interface PlayerInventoryProps {
+  selectedSlot: ItemProps | null;
+  setSelectedSlot: (item: ItemProps | null) => void;
+}
+
+const PlayerInventory = ({
+  selectedSlot,
+  setSelectedSlot,
+}: PlayerInventoryProps) => {
   // state variables
   const [showTooltip, setShowTooltip] = useState(false);
   const [tooltipContent, setTooltipContent] = useState("");
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-  const [selectedSlot, setSelectedSlot] = useState<ItemProps | null>(null);
 
   // slot refs
   const slotRefs = useRef<{ [key: string]: HTMLElement | null }>({});
@@ -41,43 +45,49 @@ const PlayerInventory: React.FC = () => {
     setCursorPosition({ x: event.clientX, y: event.clientY });
   };
 
-  const handleSlotClick = (item: ItemProps | null) => {
+  const handleSlotClick = (
+    item: ItemProps | null,
+    slotPosition: number | string
+  ) => {
     if (
       item &&
-      selectedSlot &&
-      item.dictionaryID === selectedSlot.dictionaryID
+      item.dictionaryID === (selectedSlot ? selectedSlot.dictionaryID : null)
     ) {
-      //console.log("Set the selected slot to null!");
       setSelectedSlot(null);
       setShowTooltip(true);
     } else {
-      //console.log("Set the selected slot to the item clicked!");
-      setSelectedSlot(item);
+      setSelectedSlot(item ? item : null);
       if (item !== null) {
         setShowTooltip(false);
       }
+      // console.log(
+      //   item
+      //     ? `${item?.name} x${item?.amount} is located at ${item?.slotPosition}`
+      //     : "Item doesn't exist."
+      // );
     }
   };
 
   // inventory information code (separate from render code)
-  const inventoryInformation = sessionInventory ? (
+  const sessInventory = sessionMainSave.value.inventory;
+  const inventoryInformation = sessInventory ? (
     <div>
       <span className="information_stat">Inventory level:</span>{" "}
-      {sessionInventory.properties.inventoryLevel}
+      {sessInventory.properties.inventoryLevel}
       <br />
       <span className="information_stat">Armor:</span>{" "}
-      {sessionInventory.properties.canEquipArmor
+      {sessInventory.properties.canEquipArmor
         ? "Allowed, full set."
         : "Not allowed"}{" "}
       <br />
       <span className="information_stat">Food:</span>{" "}
-      {sessionInventory.properties.canEquipFood
-        ? `Allowed, up to ${sessionInventory.properties.maxFood} consumables.`
+      {sessInventory.properties.canEquipFood
+        ? `Allowed, up to ${sessInventory.properties.maxFood} consumables.`
         : "Not allowed"}{" "}
       <br />
       <span className="information_stat">Weapons:</span>{" "}
-      {sessionInventory.properties.canEquipWeapons
-        ? `Allowed, up to ${sessionInventory.properties.maxWeapons} weaponry.`
+      {sessInventory.properties.canEquipWeapons
+        ? `Allowed, up to ${sessInventory.properties.maxWeapons} weaponry.`
         : "Not allowed"}{" "}
       <br />
       <span className="information_stat">Upgrades:</span> TBA.
@@ -85,168 +95,228 @@ const PlayerInventory: React.FC = () => {
     </div>
   ) : null;
 
+  // short
+
+  const shortenName = (name: string) => {
+    if (name.length > 25) {
+      return name.substring(0, 25) + "...";
+    }
+    return name;
+  };
+
   // rendering functions for slots
   const renderArmorSlot = (slotName: string) => {
     // todo : rendering equipped armor, utility
-    if (!sessionInventory) return null;
 
-    const slotNameKey = slotName as keyof typeof sessionInventory.armor;
-    const armor = sessionInventory.armor[slotNameKey];
-    const name = armor ? armor.name : " ";
+    const slotNameKey = slotName as keyof typeof sessInventory.armor;
+    const armor = sessInventory.armor[slotNameKey];
+    const shortenedName = armor.item ? shortenName(armor.item.name) : " ";
     const slotSubtype = "armor";
     const isSelected =
-      selectedSlot && armor && armor.dictionaryID === selectedSlot.dictionaryID;
+      selectedSlot && armor && armor.slotPosition === selectedSlot.slotPosition;
+
+    const slotPosition = `AR_${slotName}`;
+
+    if (armor != null) {
+      armor.slotPosition = slotPosition;
+    }
 
     return (
       <div
         key={`ArmorSlot-${slotName}`}
+        id={slotPosition}
         className={`inv_slot_armor ${slotName} ${isSelected ? "Selected" : ""}`}
         ref={(el) => (slotRefs.current[slotName] = el)}
-        onMouseEnter={() => handleSlotHover(armor, slotSubtype)}
+        onMouseEnter={() => handleSlotHover(armor.item, slotSubtype)}
         onMouseLeave={handleSlotLeave}
         onMouseMove={handleMouseMove}
-        onClick={() => handleSlotClick(armor || null)}
+        onClick={() => handleSlotClick(armor.item || null, slotName)}
       >
-        <span className="inv_slot_armor_text">{name}</span>
+        {shortenedName}
       </div>
     );
   };
 
   const renderWeaponSlot = (slotName: string) => {
     // todo : rendering equipped weapons, utility
-    if (!sessionInventory) return null;
+    if (!sessInventory) return null;
 
-    const slotNameKey =
-      slotName as keyof typeof sessionInventory.equippedWeapons;
-    const weapon = sessionInventory.equippedWeapons[slotNameKey];
-    const name = weapon ? weapon.name : " ";
-    const slotSubtype = "weapon";
-    const isSelected =
-      selectedSlot &&
-      weapon &&
-      weapon.dictionaryID === selectedSlot.dictionaryID;
+    const order = ["firstWeapon", "secondWeapon", "thirdWeapon"];
+    let currentIndex;
 
-    return (
-      <div
-        key={`WeaponSlot-${slotName}`}
-        className={`inv_slot_weapon ${isSelected ? "Selected" : ""}`}
-        ref={(el) => (slotRefs.current[slotName] = el)}
-        onMouseEnter={() => handleSlotHover(weapon, slotSubtype)}
-        onMouseLeave={handleSlotLeave}
-        onMouseMove={handleMouseMove}
-        onClick={() => handleSlotClick(weapon || null)}
-      >
-        <span className="inv_slot_weapon_text">{name}</span>
-      </div>
-    );
+    for (let i = 0; i < order.length; i++) {
+      if (slotName === order[i]) {
+        currentIndex = i;
+      }
+    }
+
+    if (currentIndex && currentIndex <= sessInventory.properties.maxWeapons) {
+      const slotNameKey =
+        slotName as keyof typeof sessInventory.equippedWeapons;
+      const weapon = sessInventory.equippedWeapons[slotNameKey];
+      const shortenedName = weapon ? shortenName(weapon.name) : " ";
+      const slotSubtype = "weapon";
+      const isSelected =
+        selectedSlot &&
+        weapon &&
+        weapon.slotPosition === selectedSlot.slotPosition;
+
+      const slotPosition = `WP_${slotName}`;
+
+      if (weapon != null) {
+        weapon.slotPosition = slotPosition;
+      }
+
+      return (
+        <div
+          key={`WeaponSlot-${slotName}`}
+          id={slotPosition}
+          className={`inv_slot_weapon ${isSelected ? "Selected" : ""}`}
+          ref={(el) => (slotRefs.current[slotName] = el)}
+          onMouseEnter={() => handleSlotHover(weapon, slotSubtype)}
+          onMouseLeave={handleSlotLeave}
+          onMouseMove={handleMouseMove}
+          onClick={() => handleSlotClick(weapon || null, slotName)}
+        >
+          {shortenedName}
+        </div>
+      );
+    }
   };
 
   const renderFoodSlot = (slotName: string) => {
     // todo : rendering equipped food (+ amount), utility
-    if (!sessionInventory) return null;
+    if (!sessInventory) return null;
 
-    const slotNameKey = slotName as keyof typeof sessionInventory.equippedFood;
-    const food = sessionInventory.equippedFood[slotNameKey];
-    const name = food ? food.name : " ";
-    const slotSubtype = "food";
+    const order = ["firstFood", "secondFood", "thirdFood"];
+    let currentIndex;
+
+    for (let i = 0; i < order.length; i++) {
+      if (slotName === order[i]) {
+        currentIndex = i;
+      }
+    }
+
+    if (currentIndex && currentIndex <= sessInventory.properties.maxFood) {
+      const slotNameKey = slotName as keyof typeof sessInventory.equippedFood;
+      const food = sessInventory.equippedFood[slotNameKey];
+      const shortenedName = food ? shortenName(food.name) : " ";
+      const slotSubtype = "food";
+      const isSelected =
+        selectedSlot && food && food.slotPosition === selectedSlot.slotPosition;
+
+      const slotPosition = `FD_${slotName}`;
+
+      if (food != null) {
+        food.slotPosition = slotPosition;
+      }
+
+      return (
+        <div
+          key={slotName}
+          id={slotPosition}
+          className={`inv_slot_food ${isSelected ? "Selected" : ""}`}
+          ref={(el) => (slotRefs.current[slotName] = el)}
+          onMouseEnter={() => handleSlotHover(food, slotSubtype)}
+          onMouseLeave={handleSlotLeave}
+          onMouseMove={handleMouseMove}
+          onClick={() => handleSlotClick(food || null, slotName)}
+        >
+          {shortenedName}
+        </div>
+      );
+    }
+  };
+
+  const renderToolSlots = (slotName: string) => {
+    // todo : rendering equipped tools, utility
+    if (!sessInventory) return null;
+
+    const slotNameKey = slotName as keyof typeof sessInventory.equippedTools;
+    const tool = sessInventory.equippedTools[slotNameKey];
+    const shortenedName = tool && tool.item ? shortenName(tool.item.name) : "";
+    const slotSubtype = "tool";
+
     const isSelected =
-      selectedSlot && food && food.dictionaryID === selectedSlot.dictionaryID;
+      selectedSlot && tool && tool.slotPosition === selectedSlot.slotPosition;
+
+    const slotPosition = `TL_${slotName}`;
+
+    if (tool != null) {
+      tool.slotPosition = slotPosition;
+    }
 
     return (
       <div
         key={slotName}
-        className={`inv_slot_food ${isSelected ? "Selected" : ""}`}
+        id={slotPosition}
+        className={`inv_slot_tool ${isSelected ? "Selected" : ""}`}
         ref={(el) => (slotRefs.current[slotName] = el)}
-        onMouseEnter={() => handleSlotHover(food, slotSubtype)}
+        onMouseEnter={() => handleSlotHover(tool.item, slotSubtype)}
         onMouseLeave={handleSlotLeave}
         onMouseMove={handleMouseMove}
-        onClick={() => handleSlotClick(food || null)}
+        onClick={() => handleSlotClick(tool.item || null, slotName)}
       >
-        <span className="inv_slot_food_text">{name}</span>
+        {shortenedName}
       </div>
     );
   };
 
-  const renderToolSlots = () => {
-    // todo : rendering equipped tools, utility
-    if (!sessionInventory) return null;
-
-    const toolSlots = [];
-
-    const equippedTools = sessionInventory.equippedTools as {
-      [key: string]: ToolProps | null;
-    };
-    const toolSlotKeys = Object.keys(equippedTools);
-
-    for (let i = 0; i < toolSlotKeys.length; i++) {
-      const currentTask = toolSlotKeys[i];
-      const tool = equippedTools[currentTask];
-      const name = tool ? tool.name : " ";
-      const slotSubtype = "tool";
-      const isSelected =
-        selectedSlot && tool && tool.dictionaryID === selectedSlot.dictionaryID;
-
-      toolSlots.push(
-        <div
-          key={`${currentTask}Tool`}
-          className={`inv_slot_tool ${currentTask} ${
-            isSelected ? "Selected" : ""
-          }`}
-          ref={(el) => (slotRefs.current[currentTask] = el)}
-          onMouseEnter={() => handleSlotHover(tool, slotSubtype)}
-          onMouseLeave={handleSlotLeave}
-          onMouseMove={handleMouseMove}
-          onClick={() => handleSlotClick(tool || null)}
-        >
-          <span className="inv_slot_tool_text">{name}</span>
-        </div>
-      );
-    }
-
-    return (
-      <>
-        <div className="tool_grid">{toolSlots}</div>
-      </>
-    );
-  };
-
   const renderBackpackSlots = () => {
-    if (!sessionInventory) return null;
+    if (!sessInventory) return null;
 
     const backpackSlots = [];
-    const count = sessionInventory.properties.inventorySlots;
+    const count = sessInventory.properties.inventorySlots;
 
     for (let i = 0; i < count; i++) {
-      const itemID: string | null = sessionInventory.backpack[i].dictionaryID;
-      let item = sessionInventory.backpack[i].item;
+      //console.log(sessInventory, sessInventory.backpack[i]?.dictionaryID);
+      const backpackItem = sessInventory.backpack[i];
+      if (!backpackItem) {
+        continue; //skip if item = undefined
+      }
+
+      const slotPosition = `BP_${i}`;
+      const itemID: string | null = sessInventory.backpack[i].dictionaryID;
+      let item = sessInventory.backpack[i].item;
 
       if (itemID) {
         for (let c = 0; c < DictionaryArray.length; c++) {
           if (itemID in DictionaryArray[c]) {
             const itemDetails = DictionaryArray[c][itemID];
             item = { ...itemDetails };
-            item.amount = sessionInventory.backpack[i].amount;
+            item.amount = sessInventory.backpack[i].amount;
+            item.slotPosition = slotPosition;
             break;
           }
         }
       }
 
-      const name = item ? item.name : " ";
+      const shortenedName = item ? shortenName(item.name) : " ";
       const slotSubtype = item ? item.type : "empty";
+      let isResource;
+
+      if (item) {
+        item.slotPosition = slotPosition;
+        if (item.type == "resource") {
+          isResource = true;
+        }
+      }
+
       const isSelected =
-        selectedSlot && item && item.dictionaryID === selectedSlot.dictionaryID;
+        selectedSlot && item && item.slotPosition === selectedSlot.slotPosition;
 
       backpackSlots.push(
         <div
           key={`backpackSlot${i}`}
+          id={slotPosition}
           className={`inv_slot default ${isSelected ? "Selected" : ""}`}
           ref={(el) => (slotRefs.current[`backpackSlot${i}`] = el)}
           onMouseEnter={() => handleSlotHover(item, slotSubtype)}
           onMouseLeave={handleSlotLeave}
           onMouseMove={handleMouseMove}
-          onClick={() => handleSlotClick(item || null)}
+          onClick={() => handleSlotClick(item || null, `backpackSlot${i}`)}
         >
-          {name}
+          {`${shortenedName}`} {isResource ? `x${item?.amount}` : ""}
         </div>
       );
     }
@@ -261,28 +331,46 @@ const PlayerInventory: React.FC = () => {
         <div className="inv_main_title">👤 User's Inventory</div>
         <div className="inv_grid">
           <div className="inv_main_armor">
-            <span className="yellowSpan">Armor</span>
-            <div className="inv_slot_armors">
-              {Object.keys(sessionInventory?.armor || {}).map((slotName) =>
-                renderArmorSlot(slotName)
-              )}
-            </div>
+            <span className="yellowSpan">
+              {sessInventory.properties.canEquipArmor ? "Armor" : "🔒"}
+            </span>
+            {sessInventory.properties.canEquipArmor && (
+              <>
+                <div className="inv_slot_armors">
+                  {Object.keys(sessInventory.armor || {}).map((slotName) =>
+                    renderArmorSlot(slotName)
+                  )}
+                </div>
+              </>
+            )}
           </div>
           <div className="inv_main_weapons">
-            <span className="yellowSpan">Weapons</span>
-            <div className="inv_slot_weapons">
-              {Object.keys(sessionInventory?.equippedWeapons || {}).map(
-                (slotName) => renderWeaponSlot(slotName)
-              )}
-            </div>
+            <span className="yellowSpan">
+              {sessInventory.properties.canEquipWeapons ? "Weapon" : "🔒"}
+            </span>
+            {sessInventory.properties.canEquipWeapons && (
+              <>
+                <div className="inv_slot_weapons">
+                  {Object.keys(sessInventory.equippedWeapons || {}).map(
+                    (slotName) => renderWeaponSlot(slotName)
+                  )}
+                </div>
+              </>
+            )}
           </div>
           <div className="inv_main_food">
-            <span className="yellowSpan">Food</span>
-            <div className="inv_slot_foods">
-              {Object.keys(sessionInventory?.equippedFood || {}).map(
-                (slotName) => renderFoodSlot(slotName)
-              )}
-            </div>
+            <span className="yellowSpan">
+              {sessInventory.properties.canEquipFood ? "Food" : "🔒"}
+            </span>
+            {sessInventory.properties.canEquipFood && (
+              <>
+                <div className="inv_slot_foods">
+                  {Object.keys(sessInventory.equippedFood || {}).map(
+                    (slotName) => renderFoodSlot(slotName)
+                  )}
+                </div>
+              </>
+            )}
           </div>
           <div className="inv_main_info">
             <h2>❕ Inventory information</h2>
@@ -290,7 +378,11 @@ const PlayerInventory: React.FC = () => {
           </div>
           <div className="inv_main_tools">
             <span className="yellowSpan">Tools</span>
-            {renderToolSlots()}
+            <div className="tool_grid">
+              {Object.keys(sessInventory.equippedTools || {}).map((slotName) =>
+                renderToolSlots(slotName)
+              )}
+            </div>
           </div>
           <div className="inv_main_slots">
             <span className="yellowSpan">Backpack Inventory</span>
@@ -301,7 +393,9 @@ const PlayerInventory: React.FC = () => {
       {showTooltip && (
         <Tooltip content={tooltipContent} position={cursorPosition} />
       )}
-      {selectedSlot && <SlotMenu item={selectedSlot} />}
+      {selectedSlot && (
+        <SlotMenu item={selectedSlot} setSelectedSlot={setSelectedSlot} />
+      )}
     </>
   );
 };

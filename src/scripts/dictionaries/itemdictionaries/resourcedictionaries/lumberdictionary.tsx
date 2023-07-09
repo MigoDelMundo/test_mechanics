@@ -1,14 +1,15 @@
 import {
-  ResourceTypes,
-  ResourceProps,
   ItemTypes,
-} from "../../../constants/interfaces/itemprops";
+  RarityTypes,
+  ResourceTypes,
+} from "../../../constants/enumerations";
+import { ResourceProps } from "../../../constants/interfaces/itemprops";
 
 export const LumberDictionary: Record<string, ResourceProps> = {
   "01_000001": {
     name: "Oak Lumber",
     type: ItemTypes.Resource,
-    rarity: "Common",
+    rarity: RarityTypes.tier1,
     description:
       "Lumber retrieved from oak trees visible far and wide in the lush forest of where you spawned.",
     amount: 0,

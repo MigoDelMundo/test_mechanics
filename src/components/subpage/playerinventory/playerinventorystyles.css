@@ -44,7 +44,6 @@
   padding: 15px;
   text-align: center;
   font-size: 1.25rem;
-  font-weight: bold;
   user-select: none;
 }
 
@@ -83,6 +82,7 @@
 .inv_slot_food,
 .inv_slot_tool,
 .inv_slot {
+  font-size: 11px;
   background-color: transparent;
   border: 3px solid rgb(138, 138, 140);
   border-radius: 10px;
@@ -90,9 +90,11 @@
   background-position: center;
   background-size: cover;
   transition: border 0.4s, color 0.4s;
-  padding: 10px;
-  text-align: center;
+  padding: 7px;
+  text-align: left;
   user-select: none;
+  white-space: break-spaces; /* Prevents text from wrapping to the next line */
+  overflow: hidden; /* Hides any overflowing text */
 }
 
 .inv_slot {
@@ -114,6 +116,7 @@
 .inv_slot_food_text {
   font-size: 10px;
   padding: 0 auto 0;
+  margin: 0;
 }
 
 .inv_slot_armor:hover,
@@ -200,12 +203,13 @@
 
 .yellowSpan {
   color: rgb(255, 219, 40);
+  user-select: none;
 }
 
 .tool_grid {
   display: grid;
   grid-template-columns: repeat(11, 80px);
-  column-gap: 10px;
+  column-gap: 20px;
   height: 100%;
 }
 

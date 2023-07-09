@@ -1,24 +1,32 @@
 import React from "react";
 import { useEffect, useRef } from "react";
-import "./tooltipstyles.css";
 import { parse } from "flatted";
+
+import "./tooltipstyles.css";
+
 import {
   ResourceProps,
   ArmorProps,
   WeaponProps,
   ToolProps,
 } from "../../../../scripts/constants/interfaces/itemprops";
-import { sessionInventory } from "../../../../scripts/player/sessioninventory";
+
+import { sessionMainSave } from "../../../../scripts/player/sessionmainsave";
 
 const Tooltip = ({ content, position }: any) => {
+  const sessionInventory = sessionMainSave.value.inventory;
   const offset = 15; // adjustable offset
   const tooltipRef = useRef<HTMLDivElement>(null);
   const parsedContent = parse(content);
   const { item, slotSubtype } = parsedContent;
   let tooltipText: React.ReactNode = "";
 
+  const capitalizeString = (string: string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   if (item !== null && item !== undefined) {
-    const {
+    let {
       name,
       type,
       rarity,
@@ -32,9 +40,13 @@ const Tooltip = ({ content, position }: any) => {
 
     let amount;
 
+    if (item.rarity !== undefined) {
+      rarity = capitalizeString(rarity);
+    }
+
     for (
       let i = 0;
-      sessionInventory?.backpack && i < sessionInventory.backpack.length;
+      sessionInventory.backpack && i < sessionInventory.backpack.length;
       i++
     ) {
       if (sessionInventory.backpack[i].dictionaryID === dictionaryID) {
@@ -66,8 +78,7 @@ const Tooltip = ({ content, position }: any) => {
     if (type === "resource") {
       const resourceItem = item as ResourceProps;
       const { resourceType } = resourceItem;
-      const capitalizedResourceType =
-        resourceType.charAt(0).toUpperCase() + resourceType.slice(1);
+
       tooltipText = (
         <div>
           <span className="tooltipInfo">Name: </span>
@@ -79,7 +90,7 @@ const Tooltip = ({ content, position }: any) => {
           <span className="tooltipInfo">Amount: </span>
           {amount} <br />
           <span className="tooltipInfo">Resource Type: </span>
-          {capitalizedResourceType} <br />
+          {capitalizeString(resourceType)} <br />
           {footerDescription}
           <br />
         </div>
@@ -96,7 +107,7 @@ const Tooltip = ({ content, position }: any) => {
           <span className="tooltipInfo">Description: </span>
           {description} <br />
           <span className="tooltipInfo">Armor Type: </span>
-          {armorType} <br />
+          {capitalizeString(armorType)} <br />
           <span className="tooltipInfo">Bonus Attributes: </span>
           {JSON.stringify(bonusAttribute) !== null
             ? "None"
@@ -127,9 +138,9 @@ const Tooltip = ({ content, position }: any) => {
           <span className="tooltipInfo">Description: </span>
           {description} <br />
           <span className="tooltipInfo">Weapon Type: </span>
-          {weaponType} <br />
+          {capitalizeString(weaponType)} <br />
           <span className="tooltipInfo">Damage Type: </span>
-          {damageType} <br />
+          {capitalizeString(damageType)} <br />
           <span className="tooltipInfo">Raw Damage: </span>
           {rawDamage} <br />
           <span className="tooltipInfo">Raw Speed: </span>
@@ -148,9 +159,10 @@ const Tooltip = ({ content, position }: any) => {
       );
     } else if (type === "tool") {
       const toolItem = item as ToolProps;
-      const { taskType, toolPower, bonusAttribute } = toolItem;
-      const capitalizedTaskType =
-        taskType.charAt(0).toUpperCase() + taskType.slice(1);
+      const { assignedTaskType, toolPower, bonusAttribute } = toolItem;
+
+      let fixedTaskType = capitalizeString(assignedTaskType);
+
       tooltipText = (
         <div>
           <span className="tooltipInfo">Name: </span>
@@ -160,7 +172,7 @@ const Tooltip = ({ content, position }: any) => {
           <span className="tooltipInfo">Description: </span>
           {description} <br />
           <span className="tooltipInfo">Task: </span>
-          {capitalizedTaskType}
+          {fixedTaskType}
           <br />
           <span className="tooltipInfo">Tool Strength: </span>
           {toolPower}

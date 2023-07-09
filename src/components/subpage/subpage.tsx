@@ -1,56 +1,45 @@
-import React from "react";
 import "./subpagestyles.css";
+import React, { useEffect, useState } from "react";
+
 import { getSubpageTabs } from "./subpagetabs";
 import PlayerInventory from "./playerinventory/playerinventory";
+import { ItemProps } from "../../scripts/constants/interfaces/itemprops";
+import { Adventurer } from "./adventurer/adventurer";
 
-interface SubpageProps {
-  selectedTab: number;
-}
+const Subpage = ({ selectedTab }: { selectedTab: number }) => {
+  const [selectedSlot, setSelectedSlot] = useState<ItemProps | null>(null);
 
-const Subpage = ({ selectedTab }: SubpageProps) => {
   const subpageTabs = getSubpageTabs();
 
   let content;
 
-  let contentClassName = "ContentDefault";
-  if (selectedTab === 2) {
-    contentClassName += " show";
-  }
-
   switch (selectedTab) {
     case 0: // Cultivation
-      content = (
-        <div className="ContentDefault">{subpageTabs[selectedTab]}</div>
-      );
+      content = <Adventurer />;
       break;
     case 1: // Item index
       content = (
-        <div className="ContentDefault">{subpageTabs[selectedTab]}</div>
+        <PlayerInventory
+          selectedSlot={selectedSlot}
+          setSelectedSlot={setSelectedSlot}
+        />
       );
       break;
     case 2: // Player Inventory
-      content = <PlayerInventory />;
+      content = subpageTabs[selectedTab];
       break;
     case 3: // Choose Action/Task
-      content = (
-        <div className="ContentDefault">{subpageTabs[selectedTab]}</div>
-      );
+      content = subpageTabs[selectedTab];
       break;
     case 4: // Automation
-      content = (
-        <div className="ContentDefault">{subpageTabs[selectedTab]}</div>
-      );
+      content = subpageTabs[selectedTab];
       break;
     default: // Default
-      content = <div className="ContentDefault">Default Content</div>;
+      content = <>Default Content</>;
       break;
   }
 
-  return (
-    <div className="Subpage">
-      <div className={contentClassName}>{content}</div>
-    </div>
-  );
+  return <div className="Subpage">{content}</div>;
 };
 
 export default Subpage;

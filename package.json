@@ -1,12 +1,13 @@
 {
   "homepage": "https://migodelmundo.github.io/test_mechanics/",
   "name": "test-mechanics",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "crypto-js": "^4.1.1",
     "flatted": "^3.2.7",
     "gh-pages": "^5.0.0",
     "react": "^18.2.0",
@@ -42,6 +43,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@types/crypto-js": "^4.1.1",
     "@types/react": "^18.2.9",
     "@types/react-dom": "^18.2.4",
     "tsconfig": "^7.0.0",
