@@ -1,4 +1,10 @@
-var subpageTabs = ["Adventurer", "Inventory", "Cultivation", "Tasks", "Automation"];
+var subpageTabs = [
+  "Adventurer", 
+  "Inventory", 
+  "???", // Cultivation
+  "???", // Tasks
+  "???", // Automation (?)
+  "Settings"];
 
 export const setSubpageTabs = (name) => {
   subpageTabs = name;

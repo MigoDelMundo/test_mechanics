@@ -1,14 +1,16 @@
-// enums: itemtypes, armortypes, resourcetypes, weapontypes, tasktypes, damagetypes, raritytypes
-
+// item
 export enum ItemTypes {
   // mostly for backend
   Resource = "resource",
   Weapon = "weapon",
   Armor = "armor",
   Tool = "tool",
+  Food = "food",
+  Material = "material",
+  Workspace = "workspace",
   Artifact = "artifact", // idk why i put this here i might add some purpose to it in the future
 }
-
+// subitems
 export enum ArmorTypes {
   // for the armor type property of ArmorProps
   Necklace = "necklace",
@@ -21,7 +23,6 @@ export enum ArmorTypes {
   Boots = "boots",
   // stat info will be added soon
 }
-
 export enum ResourceTypes {
   Lumber = "lumber",
   Crops = "crops",
@@ -30,7 +31,6 @@ export enum ResourceTypes {
   Livestock = "livestock",
   Underwater = "underwater",
 }
-
 export enum WeaponTypes {
   // for the weapon type property of WeaponProps
   Dagger = "dagger", // fast attack speed, low damage
@@ -40,7 +40,15 @@ export enum WeaponTypes {
   Wand = "wand", // fast attack speed, low magic damage
   Staff = "staff", // medium attack speed, medium magic damage
 }
-
+// subitem properties
+export enum FoodSizeTypes {
+  s = "small",
+  m = "medium",
+  l = "large",
+  xl = "extralarge",
+  xxl = "extraextralarge",
+}
+// environment/mechanics
 export enum TaskTypes {
   // refer to notion notes
   Woodchopping = "woodchopping",
@@ -54,14 +62,12 @@ export enum TaskTypes {
   Metalcrafting = "metalcrafting",
   Researching = "researching",
 }
-
 export enum DamageTypes {
   // for the different damage types of WeaponProps
   Physical = "physical", // self explanatory
   Magical = "magical", // also self explanatory
   Absolute = "absolute", // ignores defense
 }
-
 export enum RarityTypes {
   // to be changed in the future
   tier1 = "common",
@@ -69,4 +75,15 @@ export enum RarityTypes {
   tier3 = "rare",
   tier4 = "epic",
   tier5 = "legendary",
+}
+// inventory
+export enum WeaponSlotTypes {
+  first = "firstWeapon",
+  second = "secondWeapon",
+  third = "thirdWeapon",
+}
+export enum FoodSlotTypes {
+  first = "firstFood",
+  second = "secondFood",
+  third = "thirdFood",
 }

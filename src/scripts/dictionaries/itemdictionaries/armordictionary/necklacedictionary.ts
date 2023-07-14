@@ -13,14 +13,14 @@ export const NecklaceDictionary: Record<string, ArmorProps> = {
     description:
       "A shimmering gold necklace with a solid peridot gem in the middle. Given to those who participated in the early phases of the game.",
     amount: 0,
-    statRequirement: {},
+    statRequirement: { potency: 1, resilience: 1 },
     coinValue: 0,
     canUse: false,
     canDelete: false,
     canEquip: true,
     dictionaryID: "04_000001",
     armorType: ArmorTypes.Necklace,
-    bonusAttribute: {},
+    bonusAttribute: { potency: 10, resilience: 10 },
   },
   "04_000002": {
     name: "Dark Necklace of the Arkenheim",
@@ -29,13 +29,13 @@ export const NecklaceDictionary: Record<string, ArmorProps> = {
     description:
       "Why do you have this? You are no Arkenheim. Only those who have lived through the reign of Arkenheim as the highest of royalty can have this... so why is someone like you wielding it?",
     amount: 0,
-    statRequirement: {},
+    statRequirement: { potency: 1, resilience: 1 },
+    bonusAttribute: { potency: 10, resilience: 10 },
     coinValue: 0,
     canUse: false,
     canDelete: true,
     canEquip: true,
     dictionaryID: "04_000002",
     armorType: ArmorTypes.Necklace,
-    bonusAttribute: {},
   },
 };

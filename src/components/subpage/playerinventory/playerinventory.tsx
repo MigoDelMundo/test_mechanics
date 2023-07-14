@@ -4,11 +4,12 @@ import { stringify } from "flatted";
 import "./playerinventorystyles.css";
 
 import { ItemProps } from "../../../scripts/constants/interfaces/itemprops.ts";
-import DictionaryArray from "../../../scripts/dictionaries/dictionariesarray.tsx";
+import { DictionaryArray } from "../../../scripts/dictionaries/dictionariesarray.tsx";
 import { sessionMainSave } from "../../../scripts/player/sessionmainsave.tsx";
 
 import Tooltip from "./tooltip/tooltip.tsx";
 import SlotMenu from "./slotmenu/slotmenu.tsx";
+import { sortBackpack } from "../../../scripts/mechanics/inventorylogic.tsx";
 
 // notes: icons color is rgb(38, 38, 40)
 // icon lines is 3px wide
@@ -138,31 +139,20 @@ const PlayerInventory = ({
   };
 
   const renderWeaponSlot = (slotName: string) => {
-    // todo : rendering equipped weapons, utility
-    if (!sessInventory) return null;
+    if (!sessInventory) return; // return if session inventory doesnt exist
 
-    const order = ["firstWeapon", "secondWeapon", "thirdWeapon"];
-    let currentIndex;
+    const slotNameKey = slotName as keyof typeof sessInventory.equippedWeapons;
+    const weapon = sessInventory.equippedWeapons[slotNameKey];
+    const shortenedName = weapon.item ? shortenName(weapon.item.name) : " ";
+    const slotSubtype = "weapon";
+    const isSelected =
+      selectedSlot &&
+      weapon &&
+      weapon.slotPosition === selectedSlot.slotPosition;
 
-    for (let i = 0; i < order.length; i++) {
-      if (slotName === order[i]) {
-        currentIndex = i;
-      }
-    }
+    const slotPosition = `WP_${slotName}`;
 
-    if (currentIndex && currentIndex <= sessInventory.properties.maxWeapons) {
-      const slotNameKey =
-        slotName as keyof typeof sessInventory.equippedWeapons;
-      const weapon = sessInventory.equippedWeapons[slotNameKey];
-      const shortenedName = weapon ? shortenName(weapon.name) : " ";
-      const slotSubtype = "weapon";
-      const isSelected =
-        selectedSlot &&
-        weapon &&
-        weapon.slotPosition === selectedSlot.slotPosition;
-
-      const slotPosition = `WP_${slotName}`;
-
+    if (sessInventory.equippedWeapons[slotNameKey].unlocked) {
       if (weapon != null) {
         weapon.slotPosition = slotPosition;
       }
@@ -173,10 +163,12 @@ const PlayerInventory = ({
           id={slotPosition}
           className={`inv_slot_weapon ${isSelected ? "Selected" : ""}`}
           ref={(el) => (slotRefs.current[slotName] = el)}
-          onMouseEnter={() => handleSlotHover(weapon, slotSubtype)}
+          onMouseEnter={() => handleSlotHover(weapon.item, slotSubtype)}
           onMouseLeave={handleSlotLeave}
           onMouseMove={handleMouseMove}
-          onClick={() => handleSlotClick(weapon || null, slotName)}
+          onClick={() => {
+            handleSlotClick(weapon.item || null, slotName);
+          }}
         >
           {shortenedName}
         </div>
@@ -185,28 +177,16 @@ const PlayerInventory = ({
   };
 
   const renderFoodSlot = (slotName: string) => {
-    // todo : rendering equipped food (+ amount), utility
-    if (!sessInventory) return null;
+    const slotNameKey = slotName as keyof typeof sessInventory.equippedFood;
+    const food = sessInventory.equippedFood[slotNameKey];
+    const shortenedName = food.item ? shortenName(food.item.name) : " ";
+    const slotSubtype = "food";
+    const isSelected =
+      selectedSlot && food && food.slotPosition === selectedSlot.slotPosition;
 
-    const order = ["firstFood", "secondFood", "thirdFood"];
-    let currentIndex;
+    const slotPosition = `FD_${slotName}`;
 
-    for (let i = 0; i < order.length; i++) {
-      if (slotName === order[i]) {
-        currentIndex = i;
-      }
-    }
-
-    if (currentIndex && currentIndex <= sessInventory.properties.maxFood) {
-      const slotNameKey = slotName as keyof typeof sessInventory.equippedFood;
-      const food = sessInventory.equippedFood[slotNameKey];
-      const shortenedName = food ? shortenName(food.name) : " ";
-      const slotSubtype = "food";
-      const isSelected =
-        selectedSlot && food && food.slotPosition === selectedSlot.slotPosition;
-
-      const slotPosition = `FD_${slotName}`;
-
+    if (sessInventory.equippedFood[slotNameKey].unlocked) {
       if (food != null) {
         food.slotPosition = slotPosition;
       }
@@ -217,12 +197,13 @@ const PlayerInventory = ({
           id={slotPosition}
           className={`inv_slot_food ${isSelected ? "Selected" : ""}`}
           ref={(el) => (slotRefs.current[slotName] = el)}
-          onMouseEnter={() => handleSlotHover(food, slotSubtype)}
+          onMouseEnter={() => handleSlotHover(food.item, slotSubtype)}
           onMouseLeave={handleSlotLeave}
           onMouseMove={handleMouseMove}
-          onClick={() => handleSlotClick(food || null, slotName)}
+          onClick={() => handleSlotClick(food.item || null, slotName)}
         >
-          {shortenedName}
+          {shortenedName}{" "}
+          {food.item && food.item?.amount > 1 ? `x${food.item?.amount}` : ""}
         </div>
       );
     }
@@ -293,12 +274,15 @@ const PlayerInventory = ({
 
       const shortenedName = item ? shortenName(item.name) : " ";
       const slotSubtype = item ? item.type : "empty";
-      let isResource;
-
+      let isResource, isMaterial, isFood;
       if (item) {
         item.slotPosition = slotPosition;
         if (item.type == "resource") {
           isResource = true;
+        } else if (item.type == "material") {
+          isMaterial = true;
+        } else if (item.type == "food") {
+          isFood = true;
         }
       }
 
@@ -316,7 +300,8 @@ const PlayerInventory = ({
           onMouseMove={handleMouseMove}
           onClick={() => handleSlotClick(item || null, `backpackSlot${i}`)}
         >
-          {`${shortenedName}`} {isResource ? `x${item?.amount}` : ""}
+          {`${shortenedName}`}{" "}
+          {isResource || isMaterial || isFood ? `x${item?.amount}` : ""}
         </div>
       );
     }
@@ -386,6 +371,16 @@ const PlayerInventory = ({
           </div>
           <div className="inv_main_slots">
             <span className="yellowSpan">Backpack Inventory</span>
+            <div className="BackpackSubgrid">
+              <div
+                className="subgridbutton"
+                onClick={() => {
+                  sessInventory.backpack = sortBackpack(sessInventory.backpack);
+                }}
+              >
+                Sort
+              </div>
+            </div>
             <div className="inventory_grid">{renderBackpackSlots()}</div>
           </div>
         </div>

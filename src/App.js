@@ -3,6 +3,8 @@ import './App.css';
 
 // script imports
 import './scripts/mechanics/mainsavelogic.tsx'
+import './scripts/mechanics/windowlifecyclelogic.tsx'
+import './scripts/mechanics/itemupdatinglogic.tsx'
 
 // (test script imports)
 import './scripts/player/testingscript.tsx';
@@ -11,6 +13,7 @@ import './scripts/player/testingscript.tsx';
 import Header from './components/header/header.tsx';
 import Sidebar from './components/sidebar/sidebar.tsx';
 import Subpage from './components/subpage/subpage.tsx';
+import { CoverScreen } from './components/coverscreen/coverscreen.tsx';
 
 
 function App() {
@@ -19,6 +22,7 @@ function App() {
        <Header />
        <Sidebar />
        <Subpage />
+       <CoverScreen />
     </div>
   );
 }

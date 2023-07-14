@@ -25,9 +25,8 @@
 }
 
 .AdventurerGridCell {
-  margin: 10px;
   padding: 10px;
-  border: 3px solid rgb(178, 178, 180);
+  /* border: 3px solid rgb(178, 178, 180); */
   border-radius: 10px;
   font-size: 13.5px;
   overflow-y: scroll;
@@ -49,7 +48,27 @@
   color: rgb(29, 152, 111);
 }
 
+.AdventurerGridCell .info.pair1 {
+  color: #b9966d;
+}
+
+.AdventurerGridCell .info.pair2 {
+  color: #a05bc2;
+}
+
+.AdventurerGridCell .info.pair3 {
+  color: #62b8b8;
+}
+
+.AdventurerGridCell .info.pair4 {
+  color: #66ba66;
+}
+
 .AdventurerGridCell .additionalinformation {
   font-style: italic;
   color: rgb(102, 102, 102);
+}
+
+.highlightStat {
+  color: rgb(255, 219, 40);
 }

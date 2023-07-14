@@ -1,8 +1,7 @@
 .Sidebar {
-    display: block;
-    height: calc(100vh - 130px);
-    width: 150px;
-    background-color: rgb(28, 28, 30);
-    padding: 30px 15px 30px;
-    float: left;
+  display: block;
+  height: calc(100vh - 100px);
+  width: 150px;
+  padding: 30px 15px 30px;
+  float: left;
 }

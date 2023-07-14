@@ -12,8 +12,12 @@
 }
 
 .tooltipInfo {
-  color: rgb(248, 75, 32);
+  color: rgb(70, 209, 244);
   font-weight: bold;
+}
+
+.tooltipInfo.variation1 {
+  color: rgb(112, 172, 172);
 }
 
 .tooltipGrey {

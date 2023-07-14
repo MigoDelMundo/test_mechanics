@@ -6,6 +6,7 @@ import {
   DamageTypes,
   TaskTypes,
   RarityTypes,
+  FoodSizeTypes,
 } from "../enumerations";
 
 export interface ItemProps {
@@ -13,10 +14,10 @@ export interface ItemProps {
   type: ItemTypes;
   rarity: RarityTypes; // what tier does the item belong to? (tba tiers)
   description: string; // description for UI and inventory
-  amount: Number; // self explanatory
+  amount: number; // self explanatory
   statRequirement: Record<string, number> | Record<string, number>[];
   // either a single stat requirement or multiple stat requirements
-  coinValue: Number; // value when sold to NPCs
+  coinValue: number; // value when sold to NPCs
   canUse: Boolean; // can you use it as in consumed?
   canDelete: Boolean; // can you delete it or is it permanent?
   canEquip: Boolean; // can you equip it like a weapon or a food?
@@ -44,6 +45,7 @@ export interface WeaponProps extends ItemProps {
   scaleDamage: number;
   scaleSpeed: number;
   scaleAccuracy: number; // all 3 scales enhance 3 stats beforehand w player stats
+  bonusAttribute: Record<string, number> | Record<string, number>[];
   // skills: any,                             // TBA
 }
 
@@ -51,4 +53,14 @@ export interface ToolProps extends ItemProps {
   assignedTaskType: TaskTypes; // which task is this used for?
   toolPower: number; // refers to how powerful the tool is to use on higher tier locations
   bonusAttribute: Record<string, number> | Record<string, number>[]; // bonus attribute like multiply resource gain or obtain certain items (TBA)
+}
+
+export interface MaterialProps extends ItemProps {}
+
+export interface WorkspaceProps extends ItemProps {}
+
+export interface FoodProps extends ItemProps {
+  foodSize: FoodSizeTypes;
+  maxStack: number;
+  effects?: any; // TBA :)
 }

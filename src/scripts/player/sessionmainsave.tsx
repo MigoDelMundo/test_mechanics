@@ -19,5 +19,3 @@ if (encryptedMainSave) {
 } else {
   console.log("Player main save unable to sync with session main save.");
 }
-
-console.log(sessionMainSave);

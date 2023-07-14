@@ -5,6 +5,8 @@ import { getSubpageTabs } from "./subpagetabs";
 import PlayerInventory from "./playerinventory/playerinventory";
 import { ItemProps } from "../../scripts/constants/interfaces/itemprops";
 import { Adventurer } from "./adventurer/adventurer";
+import { Settings } from "./settings/settings";
+import { Default } from "./default/default";
 
 const Subpage = ({ selectedTab }: { selectedTab: number }) => {
   const [selectedSlot, setSelectedSlot] = useState<ItemProps | null>(null);
@@ -34,8 +36,11 @@ const Subpage = ({ selectedTab }: { selectedTab: number }) => {
     case 4: // Automation
       content = subpageTabs[selectedTab];
       break;
+    case 5: // Settings
+      content = <Settings />;
+      break;
     default: // Default
-      content = <>Default Content</>;
+      content = <Default />;
       break;
   }
 

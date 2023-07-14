@@ -1,0 +1,71 @@
+.SettingsMain {
+  width: calc(100%-20px);
+  height: 90%;
+  padding: 10px;
+}
+
+.SettingsGrid {
+  width: 95%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 40% 25% 25%;
+  grid-template-rows: repeat(3, 1fr);
+  column-gap: 10px;
+  row-gap: 10px;
+}
+
+.SettingsGridCell {
+  display: grid;
+  /* border: 3px solid rgb(178, 178, 180); */
+  border-radius: 10px;
+  padding: 10px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.SettingsGridCell.Primary {
+  grid-row: 1 / span 3;
+}
+
+.SettingsHeading {
+  font-weight: bold;
+  font-size: 18px;
+  color: rgb(15, 220, 128);
+}
+
+.SettingsButton,
+.SettingsButton.A {
+  display: flex;
+  border: 3px solid rgb(178, 178, 180);
+  border-radius: 10px;
+  font-size: 14px;
+  padding: 5px;
+  width: 90%;
+  height: auto;
+  vertical-align: middle;
+  text-align: center;
+  justify-content: center;
+  user-select: none;
+  transition: background-color 0.2s, border 0.2s, color 0.2s;
+  margin: 5px 0 5px;
+}
+
+.SettingsButton:hover {
+  cursor: pointer;
+  background-color: rgb(26, 54, 61);
+  border-color: rgb(70, 209, 244);
+  color: rgb(70, 209, 244);
+}
+
+.SettingsButton.A:hover {
+  cursor: pointer;
+  background-color: rgb(56, 9, 9);
+  border-color: rgb(255, 0, 0);
+  color: rgb(255, 0, 0);
+}
+
+.SettingsWarning {
+  font-style: italic;
+  font-size: 13px;
+  color: rgb(102, 102, 102);
+}

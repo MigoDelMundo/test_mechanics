@@ -52,7 +52,7 @@ export const saveMainSaveToStorage = () => {
   }
 };
 export const resetMainSave = () => {
-  if (playerMainSave && sessionMainSave) {
+  if (sessionMainSave) {
     sessionMainSave.value = defaultMainSave;
     saveMainSaveToStorage();
     window.location.reload();
@@ -60,16 +60,3 @@ export const resetMainSave = () => {
     console.log("Either playerMainSave or sessionMainSave is not true.");
   }
 };
-
-// listeners (on page load and before unload)
-
-window.addEventListener("load", () => {
-  if (localStorage["playerMainSave"] === undefined) {
-    initMainSave();
-  }
-  saveMainSaveToStorage();
-});
-
-window.addEventListener("beforeunload", () => {
-  saveMainSaveToStorage();
-});

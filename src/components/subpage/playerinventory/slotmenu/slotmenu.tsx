@@ -2,6 +2,7 @@ import React from "react";
 import "./slotmenustyles.css";
 import {
   ArmorProps,
+  FoodProps,
   ItemProps,
   ResourceProps,
   ToolProps,
@@ -15,9 +16,18 @@ import {
   equipToolPiece,
   removeToolPiece,
   grantToolToSession,
+  equipWeaponPiece,
+  removeWeaponPiece,
+  findItemLocation,
+  eradicateItem,
+  equipFoodPiece,
+  removeFoodPiece,
 } from "../../../../scripts/mechanics/itemlogic";
 import { grantXPToProficiency } from "../../../../scripts/mechanics/proficiencylogic";
 import { TaskTypes } from "../../../../scripts/constants/enumerations";
+import { sessionMainSave } from "../../../../scripts/player/sessionmainsave";
+import { stringify } from "flatted";
+import { SlotProps } from "../../../../scripts/constants/interfaces/slotprops";
 
 interface SlotMenuProps {
   item: ItemProps;
@@ -27,12 +37,18 @@ interface SlotMenuProps {
 const SlotMenu = ({ item, setSelectedSlot }: SlotMenuProps) => {
   // boolean checks
 
-  const handleRemove = (parameter: string) => {
-    if (item.type === "armor") {
+  const handleRemove = (parameter: string | undefined) => {
+    if (item.type === "armor" && parameter) {
       removeArmorPiece(parameter);
       setSelectedSlot(null);
-    } else if (item.type === "tool") {
+    } else if (item.type === "tool" && parameter) {
       removeToolPiece(parameter);
+      setSelectedSlot(null);
+    } else if (item.type === "weapon" && parameter) {
+      removeWeaponPiece(parameter);
+      setSelectedSlot(null);
+    } else if (item.type === "food" && parameter) {
+      removeFoodPiece(parameter);
       setSelectedSlot(null);
     }
   };
@@ -43,6 +59,12 @@ const SlotMenu = ({ item, setSelectedSlot }: SlotMenuProps) => {
       setSelectedSlot(null);
     } else if (item.type === "tool") {
       equipToolPiece(index);
+      setSelectedSlot(null);
+    } else if (item.type === "weapon") {
+      equipWeaponPiece(index);
+      setSelectedSlot(null);
+    } else if (item.type === "food") {
+      equipFoodPiece(index);
       setSelectedSlot(null);
     }
   };
@@ -90,7 +112,39 @@ const SlotMenu = ({ item, setSelectedSlot }: SlotMenuProps) => {
           );
         }
       case "weapon":
-      case "resource":
+        if (checkItemIfEquipped(item)) {
+          return (
+            <div
+              className="button"
+              onClick={() => handleRemove(item.slotPosition)}
+            >
+              Remove {(item as WeaponProps).weaponType}?
+            </div>
+          );
+        } else {
+          return (
+            <div className="button" onClick={() => handleEquip(index)}>
+              Equip {(item as WeaponProps).weaponType}?
+            </div>
+          );
+        }
+      case "food":
+        if (checkItemIfEquipped(item)) {
+          return (
+            <div
+              className="button"
+              onClick={() => handleRemove(item.slotPosition)}
+            >
+              Remove {(item as FoodProps).type}?
+            </div>
+          );
+        } else {
+          return (
+            <div className="button" onClick={() => handleEquip(index)}>
+              Equip {(item as FoodProps).type}?
+            </div>
+          );
+        }
       case "artifact":
         // Placeholder
         break;
@@ -109,7 +163,31 @@ const SlotMenu = ({ item, setSelectedSlot }: SlotMenuProps) => {
 
   const checkIfDeletable = (item: ItemProps) => {
     if (item.canDelete) {
-      return <div className="button">Delete?</div>;
+      if (item.type === "resource" || item.type === "material") {
+        return (
+          <div
+            className="button"
+            onClick={() => {
+              eradicateItem(item);
+              setSelectedSlot(null);
+            }}
+          >
+            Delete all?
+          </div>
+        );
+      } else {
+        return (
+          <div
+            className="button"
+            onClick={() => {
+              eradicateItem(item);
+              setSelectedSlot(null);
+            }}
+          >
+            Delete?
+          </div>
+        );
+      }
     } else {
       return null;
     }
@@ -122,19 +200,6 @@ const SlotMenu = ({ item, setSelectedSlot }: SlotMenuProps) => {
       {checkIfEquippable(item)}
       {checkIfUsable(item)}
       {checkIfDeletable(item)}
-      <br />
-      <br />
-      <div className="button" onClick={resetMainSave}>
-        HARD RESET (DON'T CLICK UNLESS SURE)
-      </div>
-      <div
-        className="button"
-        onClick={() => {
-          grantXPToProficiency(TaskTypes.Woodchopping, 1000);
-        }}
-      >
-        grantXPToProficiency
-      </div>
     </div>
   );
 };

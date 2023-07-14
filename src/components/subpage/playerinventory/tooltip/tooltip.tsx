@@ -9,6 +9,8 @@ import {
   ArmorProps,
   WeaponProps,
   ToolProps,
+  MaterialProps,
+  FoodProps,
 } from "../../../../scripts/constants/interfaces/itemprops";
 
 import { sessionMainSave } from "../../../../scripts/player/sessionmainsave";
@@ -97,7 +99,28 @@ const Tooltip = ({ content, position }: any) => {
       );
     } else if (type === "armor") {
       const armorItem = item as ArmorProps;
-      const { armorType, bonusAttribute } = armorItem;
+      const { armorType, bonusAttribute, statRequirement } = armorItem;
+
+      let statRequirementString = ``;
+      let bonusAttributeString = ``;
+
+      for (const r in statRequirement) {
+        const rK = r as keyof typeof statRequirement;
+        statRequirementString += `${capitalizeString(r)}: ${
+          statRequirement[rK]
+        }, `;
+      }
+
+      for (const r in bonusAttribute) {
+        const rK = r as keyof typeof bonusAttribute;
+        bonusAttributeString += `${capitalizeString(r)}: ${
+          bonusAttribute[rK]
+        }, `;
+      }
+
+      statRequirementString = statRequirementString.slice(0, -2);
+      bonusAttributeString = bonusAttributeString.slice(0, -2);
+
       tooltipText = (
         <div>
           <span className="tooltipInfo">Name: </span>
@@ -108,10 +131,13 @@ const Tooltip = ({ content, position }: any) => {
           {description} <br />
           <span className="tooltipInfo">Armor Type: </span>
           {capitalizeString(armorType)} <br />
-          <span className="tooltipInfo">Bonus Attributes: </span>
-          {JSON.stringify(bonusAttribute) !== null
+          <span className="tooltipInfo variation1">Stat Requirements: </span>
+          {statRequirementString}
+          <br />
+          <span className="tooltipInfo variation1">Bonus Attributes: </span>
+          {Object.keys(bonusAttribute).length === 0
             ? "None"
-            : JSON.stringify(bonusAttribute)}
+            : bonusAttributeString}
           <br />
           {footerDescription}
           <br />
@@ -128,7 +154,20 @@ const Tooltip = ({ content, position }: any) => {
         scaleDamage,
         scaleSpeed,
         scaleAccuracy,
+        statRequirement,
       } = weaponItem;
+
+      let statRequirementString = ``;
+
+      for (const r in statRequirement) {
+        const rK = r as keyof typeof statRequirement;
+        statRequirementString += `${capitalizeString(r)}: ${
+          statRequirement[rK]
+        }, `;
+      }
+
+      statRequirementString = statRequirementString.slice(0, -2);
+
       tooltipText = (
         <div>
           <span className="tooltipInfo">Name: </span>
@@ -139,6 +178,9 @@ const Tooltip = ({ content, position }: any) => {
           {description} <br />
           <span className="tooltipInfo">Weapon Type: </span>
           {capitalizeString(weaponType)} <br />
+          <span className="tooltipInfo variation1">Stat Requirements: </span>
+          {statRequirementString}
+          <br />
           <span className="tooltipInfo">Damage Type: </span>
           {capitalizeString(damageType)} <br />
           <span className="tooltipInfo">Raw Damage: </span>
@@ -186,8 +228,51 @@ const Tooltip = ({ content, position }: any) => {
           <br />
         </div>
       );
+    } else if (type === "material") {
+      const materialItem = item as MaterialProps;
+
+      tooltipText = (
+        <div>
+          <span className="tooltipInfo">Name: </span>
+          {name} <br />
+          <span className="tooltipInfo">Rarity: </span>
+          {rarity} <br />
+          <span className="tooltipInfo">Description: </span>
+          {description} <br />
+          <span className="tooltipInfo">Amount: </span>
+          {amount} <br />
+          <span className="tooltipInfo">Type: </span>
+          {capitalizeString(materialItem.type)} <br />
+          {footerDescription}
+          <br />
+        </div>
+      );
+    } else if (type === "food") {
+      const foodItem = item as FoodProps;
+      const { foodSize, maxStack } = { ...foodItem };
+
+      tooltipText = (
+        <div>
+          <span className="tooltipInfo">Name: </span>
+          {name} <br />
+          <span className="tooltipInfo">Rarity: </span>
+          {rarity} <br />
+          <span className="tooltipInfo">Description: </span>
+          {description} <br />
+          <span className="tooltipInfo">Amount: </span>
+          {amount} <br />
+          <span className="tooltipInfo">Max Stack: </span>
+          {maxStack} <br />
+          <span className="tooltipInfo">Food Size: </span>
+          {capitalizeString(foodSize)} <br />
+          <span className="tooltipInfo">Effects: </span>
+          TBA <br />
+          {footerDescription}
+          <br />
+        </div>
+      );
     }
-  } else {
+  } else if (item === null || item === undefined) {
     if (slotSubtype === "armor") {
       tooltipText = "An empty armor slot that can be equipped with armor.";
     } else if (slotSubtype === "weapon") {

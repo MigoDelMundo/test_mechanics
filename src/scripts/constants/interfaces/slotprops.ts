@@ -1,4 +1,9 @@
-import { ArmorTypes, TaskTypes } from "../enumerations";
+import {
+  ArmorTypes,
+  WeaponSlotTypes,
+  TaskTypes,
+  FoodSlotTypes,
+} from "../enumerations";
 import { ItemProps } from "./itemprops";
 
 export interface SlotProps {
@@ -16,4 +21,14 @@ export interface ArmorSlotProps extends SlotProps {
 
 export interface ToolSlotProps extends SlotProps {
   slotFor: TaskTypes;
+}
+
+export interface WeaponSlotProps extends SlotProps {
+  slotFor: WeaponSlotTypes;
+  unlocked: boolean;
+}
+
+export interface FoodSlotProps extends SlotProps {
+  slotFor: FoodSlotTypes;
+  unlocked: boolean;
 }

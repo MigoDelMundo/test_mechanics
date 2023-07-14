@@ -6,7 +6,7 @@ import Subpage from "../subpage/subpage.tsx";
 
 const Sidebar = () => {
   const subpageTabs = getSubpageTabs();
-  const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedTab, setSelectedTab] = useState(-1);
 
   const handleTabClick = (index: number) => {
     //console.log(`Selected tab is changed to ${index}`);

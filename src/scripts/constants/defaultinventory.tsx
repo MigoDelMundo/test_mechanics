@@ -1,4 +1,9 @@
-import { ArmorTypes, TaskTypes } from "./enumerations";
+import {
+  ArmorTypes,
+  FoodSlotTypes,
+  TaskTypes,
+  WeaponSlotTypes,
+} from "./enumerations";
 import { InventoryProps } from "./interfaces/inventoryprops";
 
 const defaultInventory: InventoryProps = {
@@ -6,11 +11,11 @@ const defaultInventory: InventoryProps = {
     canEquipArmor: true,
     canEquipWeapons: true,
     canEquipFood: true,
-    inventoryLevel: 5,
+    inventoryLevel: 1,
     maxFood: 1,
     maxWeapons: 1,
     get inventorySlots() {
-      return this.inventoryLevel * 10;
+      return 20 + this.inventoryLevel * 10;
     },
   },
   backpack: [],
@@ -49,14 +54,44 @@ const defaultInventory: InventoryProps = {
     },
   },
   equippedFood: {
-    firstFood: null,
-    secondFood: null,
-    thirdFood: null,
+    firstFood: {
+      slotFor: FoodSlotTypes.first,
+      dictionaryID: null,
+      amount: 0,
+      unlocked: true,
+    },
+    secondFood: {
+      slotFor: FoodSlotTypes.second,
+      dictionaryID: null,
+      amount: 0,
+      unlocked: false,
+    },
+    thirdFood: {
+      slotFor: FoodSlotTypes.third,
+      dictionaryID: null,
+      amount: 0,
+      unlocked: false,
+    },
   },
   equippedWeapons: {
-    firstWeapon: null,
-    secondWeapon: null,
-    thirdWeapon: null,
+    firstWeapon: {
+      slotFor: WeaponSlotTypes.first,
+      dictionaryID: null,
+      amount: 0,
+      unlocked: true,
+    },
+    secondWeapon: {
+      slotFor: WeaponSlotTypes.second,
+      dictionaryID: null,
+      amount: 0,
+      unlocked: false,
+    },
+    thirdWeapon: {
+      slotFor: WeaponSlotTypes.third,
+      dictionaryID: null,
+      amount: 0,
+      unlocked: false,
+    },
   },
   equippedTools: {
     woodchopping: {
@@ -96,7 +131,8 @@ const defaultInventory: InventoryProps = {
 defaultInventory.backpack = Array.from(
   { length: defaultInventory.properties.inventorySlots },
   (x, index) => ({
-    slotID: index,
+    slotID: index + 1,
+    slotPosition: `BP_${index}`,
     dictionaryID: null,
     amount: 0,
   })

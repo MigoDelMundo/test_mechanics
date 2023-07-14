@@ -1,5 +1,11 @@
 import { TaskTypes } from "../enumerations";
-import { ArmorSlotProps, SlotProps, ToolSlotProps } from "./slotprops";
+import {
+  ArmorSlotProps,
+  FoodSlotProps,
+  SlotProps,
+  ToolSlotProps,
+  WeaponSlotProps,
+} from "./slotprops";
 import { ArmorProps, ToolProps } from "./itemprops";
 
 export interface InventoryProps {
@@ -24,14 +30,14 @@ export interface InventoryProps {
     rightring: ArmorSlotProps;
   };
   equippedFood: {
-    firstFood: any;
-    secondFood: any;
-    thirdFood: any;
+    firstFood: FoodSlotProps;
+    secondFood: FoodSlotProps;
+    thirdFood: FoodSlotProps;
   };
   equippedWeapons: {
-    firstWeapon: any;
-    secondWeapon: any;
-    thirdWeapon: any;
+    firstWeapon: WeaponSlotProps;
+    secondWeapon: WeaponSlotProps;
+    thirdWeapon: WeaponSlotProps;
   };
   equippedTools: {
     woodchopping: ToolSlotProps;

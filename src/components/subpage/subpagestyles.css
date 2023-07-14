@@ -3,18 +3,8 @@
   float: left;
   background-color: rgb(18, 18, 20);
   width: calc(100vw - 180px);
-  height: calc(100vh - 70px);
+  height: calc(100vh - 60px);
   text-align: left;
   overflow-y: scroll;
-  opacity: 0;
-  animation: fadeIn 0.2s ease-in forwards;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+  opacity: 1;
 }
