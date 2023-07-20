@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/test_mechanics/static/css/main.fd4e632f.css",
-    "main.js": "/test_mechanics/static/js/main.6fa346b9.js",
+    "main.css": "/test_mechanics/static/css/main.1df93fae.css",
+    "main.js": "/test_mechanics/static/js/main.49481a8c.js",
     "static/js/787.711ce6c3.chunk.js": "/test_mechanics/static/js/787.711ce6c3.chunk.js",
     "static/media/test-mechanics-official-logo.png": "/test_mechanics/static/media/test-mechanics-official-logo.92cde2340a672732531e.png",
     "static/media/food.png": "/test_mechanics/static/media/food.b1bd689e60fb5817f1d2.png",
@@ -10,13 +10,14 @@
     "static/media/bracelet.png": "/test_mechanics/static/media/bracelet.370823b4376408c8a3fc.png",
     "static/media/weapon.png": "/test_mechanics/static/media/weapon.9f948dc8d2ec56421f28.png",
     "static/media/chestplate.png": "/test_mechanics/static/media/chestplate.fa49cb03d8a904973d93.png",
+    "static/media/workspace.png": "/test_mechanics/static/media/workspace.553ec994c2e44de7d861.png",
     "index.html": "/test_mechanics/index.html",
-    "main.fd4e632f.css.map": "/test_mechanics/static/css/main.fd4e632f.css.map",
-    "main.6fa346b9.js.map": "/test_mechanics/static/js/main.6fa346b9.js.map",
+    "main.1df93fae.css.map": "/test_mechanics/static/css/main.1df93fae.css.map",
+    "main.49481a8c.js.map": "/test_mechanics/static/js/main.49481a8c.js.map",
     "787.711ce6c3.chunk.js.map": "/test_mechanics/static/js/787.711ce6c3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fd4e632f.css",
-    "static/js/main.6fa346b9.js"
+    "static/css/main.1df93fae.css",
+    "static/js/main.49481a8c.js"
   ]
 }
