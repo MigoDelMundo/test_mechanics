@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/test_mechanics/static/css/main.1df93fae.css",
+    "main.css": "/test_mechanics/static/css/main.449b6515.css",
     "main.js": "/test_mechanics/static/js/main.49481a8c.js",
     "static/js/787.711ce6c3.chunk.js": "/test_mechanics/static/js/787.711ce6c3.chunk.js",
     "static/media/test-mechanics-official-logo.png": "/test_mechanics/static/media/test-mechanics-official-logo.92cde2340a672732531e.png",
@@ -12,12 +12,12 @@
     "static/media/chestplate.png": "/test_mechanics/static/media/chestplate.fa49cb03d8a904973d93.png",
     "static/media/workspace.png": "/test_mechanics/static/media/workspace.553ec994c2e44de7d861.png",
     "index.html": "/test_mechanics/index.html",
-    "main.1df93fae.css.map": "/test_mechanics/static/css/main.1df93fae.css.map",
+    "main.449b6515.css.map": "/test_mechanics/static/css/main.449b6515.css.map",
     "main.49481a8c.js.map": "/test_mechanics/static/js/main.49481a8c.js.map",
     "787.711ce6c3.chunk.js.map": "/test_mechanics/static/js/787.711ce6c3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1df93fae.css",
+    "static/css/main.449b6515.css",
     "static/js/main.49481a8c.js"
   ]
 }
