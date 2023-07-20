@@ -5,6 +5,7 @@ import {
   SlotProps,
   ToolSlotProps,
   WeaponSlotProps,
+  WorkspaceSlotProps,
 } from "./slotprops";
 import { ArmorProps, ToolProps } from "./itemprops";
 
@@ -50,6 +51,18 @@ export interface InventoryProps {
     crafting: ToolSlotProps;
     metalcrafting: ToolSlotProps;
     researching: ToolSlotProps;
+  };
+  equippedWorkspaces: {
+    woodchopping: WorkspaceSlotProps;
+    farming: WorkspaceSlotProps;
+    mining: WorkspaceSlotProps;
+    herbGathering: WorkspaceSlotProps;
+    livestockTending: WorkspaceSlotProps;
+    fishing: WorkspaceSlotProps;
+    cooking: WorkspaceSlotProps;
+    crafting: WorkspaceSlotProps;
+    metalcrafting: WorkspaceSlotProps;
+    researching: WorkspaceSlotProps;
   };
   // TO BE ADDED YEEE
 }

@@ -1,0 +1,28 @@
+.AccumulationMain {
+  width: 1000px;
+  user-select: none;
+}
+
+.AccumulationTitleHeader {
+  width: 100%;
+  text-align: center;
+  color: rgb(15, 220, 128);
+}
+
+.AccumulationSubtitle {
+  font-style: italic;
+  color: rgb(108, 108, 110);
+  font-size: 13px;
+  width: 50%;
+}
+
+.AccumulationTaskList {
+  display: grid;
+  grid-template-columns: repeat(2, calc(500px - 20px));
+  grid-template-rows: repeat(6, 140px);
+  grid-gap: 20px;
+  width: 100%;
+  padding: 10px 0 10px;
+  font-size: 14px;
+  margin-top: 20px;
+}

@@ -3,6 +3,7 @@ import {
   WeaponSlotTypes,
   TaskTypes,
   FoodSlotTypes,
+  WorkspaceNames,
 } from "../enumerations";
 import { ItemProps } from "./itemprops";
 
@@ -31,4 +32,8 @@ export interface WeaponSlotProps extends SlotProps {
 export interface FoodSlotProps extends SlotProps {
   slotFor: FoodSlotTypes;
   unlocked: boolean;
+}
+
+export interface WorkspaceSlotProps extends SlotProps {
+  slotFor: WorkspaceNames;
 }

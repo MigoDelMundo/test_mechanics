@@ -78,168 +78,176 @@ export const Adventurer = () => {
     }
   };
   const loadCombatSkills = () => {
-    return (
-      <>
-        <span className="info pair1">Strength</span>
-        <span>
-          :{" "}
-          {cS.strength.base +
-            cS.strength.additional[0] +
-            cS.strength.additional[1]}{" "}
-        </span>
-        <span className="highlightStat">
-          {cS.strength.additional[0] !== 0
-            ? `[${cS.strength.additional[0] < 0 ? "" : "+"}${
-                cS.strength.additional[0]
-              }] `
-            : null}
-          {cS.strength.additional[1] !== 0
-            ? `[${cS.strength.additional[1] < 0 ? "" : "+"}${
-                cS.strength.additional[1]
-              }] `
-            : null}
-        </span>
-        <br />
-        <span className="info pair1">Endurance</span>
-        <span>
-          :{" "}
-          {cS.endurance.base +
-            cS.endurance.additional[0] +
-            cS.endurance.additional[1]}{" "}
-        </span>
-        <span className="highlightStat">
-          {cS.endurance.additional[0] !== 0
-            ? `[${cS.endurance.additional[0] < 0 ? "" : "+"}${
-                cS.endurance.additional[0]
-              }] `
-            : null}
-          {cS.endurance.additional[1] !== 0
-            ? `[${cS.endurance.additional[1] < 0 ? "" : "+"}${
-                cS.endurance.additional[1]
-              }] `
-            : null}
-        </span>
-        <br />
-        <span className="info pair2">Potency</span>
-        <span>
-          :{" "}
-          {cS.potency.base +
-            cS.potency.additional[0] +
-            cS.potency.additional[1]}{" "}
-        </span>
-        <span className="highlightStat">
-          {cS.potency.additional[0] !== 0
-            ? `[${cS.potency.additional[0] < 0 ? "" : "+"}${
-                cS.potency.additional[0]
-              }] `
-            : null}
-          {cS.potency.additional[1] !== 0
-            ? `[${cS.potency.additional[1] < 0 ? "" : "+"}${
-                cS.potency.additional[1]
-              }] `
-            : null}
-        </span>
-        <br />
-        <span className="info pair2">Resilience</span>
-        <span>
-          :{" "}
-          {cS.resilience.base +
-            cS.resilience.additional[0] +
-            cS.resilience.additional[1]}{" "}
-        </span>
-        <span className="highlightStat">
-          {cS.resilience.additional[0] !== 0
-            ? `[${cS.resilience.additional[0] < 0 ? "" : "+"}${
-                cS.resilience.additional[0]
-              }] `
-            : null}
-          {cS.resilience.additional[1] !== 0
-            ? `[${cS.resilience.additional[1] < 0 ? "" : "+"}${
-                cS.resilience.additional[1]
-              }] `
-            : null}
-        </span>
-        <br />
-        <span className="info pair3">Precision</span>
-        <span>
-          :{" "}
-          {cS.precision.base +
-            cS.precision.additional[0] +
-            cS.precision.additional[1]}{" "}
-        </span>
-        <span className="highlightStat">
-          {cS.precision.additional[0] !== 0
-            ? `[${cS.precision.additional[0] < 0 ? "" : "+"}${
-                cS.precision.additional[0]
-              }] `
-            : null}
-          {cS.precision.additional[1] !== 0
-            ? `[${cS.precision.additional[1] < 0 ? "" : "+"}${
-                cS.precision.additional[1]
-              }] `
-            : null}
-        </span>
-        <br />
-        <span className="info pair3">Evasion</span>
-        <span>
-          :{" "}
-          {cS.evasion.base +
-            cS.evasion.additional[0] +
-            cS.evasion.additional[1]}{" "}
-        </span>
-        <span className="highlightStat">
-          {cS.evasion.additional[0] !== 0
-            ? `[${cS.evasion.additional[0] < 0 ? "" : "+"}${
-                cS.evasion.additional[0]
-              }] `
-            : null}
-          {cS.evasion.additional[1] !== 0
-            ? `[${cS.evasion.additional[1] < 0 ? "" : "+"}${
-                cS.evasion.additional[1]
-              }] `
-            : null}
-        </span>
-        <br />
-        <span className="info pair3">Speed</span>
-        <span>
-          : {cS.speed.base + cS.speed.additional[0] + cS.speed.additional[1]}{" "}
-        </span>
-        <span className="highlightStat">
-          {cS.speed.additional[0] !== 0
-            ? `[${cS.speed.additional[0] < 0 ? "" : "+"}${
-                cS.speed.additional[0]
-              }] `
-            : null}
-          {cS.speed.additional[1] !== 0
-            ? `[${cS.speed.additional[1] < 0 ? "" : "+"}${
-                cS.speed.additional[1]
-              }] `
-            : null}
-        </span>
-        <br />
-        <span className="info pair4">Stamina</span>
-        <span>
-          :{" "}
-          {cS.stamina.base +
-            cS.stamina.additional[0] +
-            cS.stamina.additional[1]}{" "}
-        </span>
-        <span className="highlightStat">
-          {cS.stamina.additional[0] !== 0
-            ? `[${cS.stamina.additional[0] < 0 ? "" : "+"}${
-                cS.stamina.additional[0]
-              }] `
-            : null}
-          {cS.stamina.additional[1] !== 0
-            ? `[${cS.stamina.additional[1] < 0 ? "" : "+"}${
-                cS.stamina.additional[1]
-              }] `
-            : null}
-        </span>
-        <br />
-        <br />
-      </>
-    );
+    if (cS) {
+      return (
+        <>
+          <span className="info pair1">Strength</span>
+          <span>
+            :{" "}
+            {cS.strength.base +
+              cS.strength.additional[0] +
+              cS.strength.additional[1]}{" "}
+          </span>
+          <span className="highlightStat">
+            {cS.strength.additional[0] !== 0
+              ? `[${cS.strength.additional[0] < 0 ? "" : "+"}${
+                  cS.strength.additional[0]
+                }] `
+              : null}
+            {cS.strength.additional[1] !== 0
+              ? `[${cS.strength.additional[1] < 0 ? "" : "+"}${
+                  cS.strength.additional[1]
+                }] `
+              : null}
+          </span>
+          <br />
+          <span className="info pair1">Endurance</span>
+          <span>
+            :{" "}
+            {cS.endurance.base +
+              cS.endurance.additional[0] +
+              cS.endurance.additional[1]}{" "}
+          </span>
+          <span className="highlightStat">
+            {cS.endurance.additional[0] !== 0
+              ? `[${cS.endurance.additional[0] < 0 ? "" : "+"}${
+                  cS.endurance.additional[0]
+                }] `
+              : null}
+            {cS.endurance.additional[1] !== 0
+              ? `[${cS.endurance.additional[1] < 0 ? "" : "+"}${
+                  cS.endurance.additional[1]
+                }] `
+              : null}
+          </span>
+          <br />
+          <span className="info pair2">Potency</span>
+          <span>
+            :{" "}
+            {cS.potency.base +
+              cS.potency.additional[0] +
+              cS.potency.additional[1]}{" "}
+          </span>
+          <span className="highlightStat">
+            {cS.potency.additional[0] !== 0
+              ? `[${cS.potency.additional[0] < 0 ? "" : "+"}${
+                  cS.potency.additional[0]
+                }] `
+              : null}
+            {cS.potency.additional[1] !== 0
+              ? `[${cS.potency.additional[1] < 0 ? "" : "+"}${
+                  cS.potency.additional[1]
+                }] `
+              : null}
+          </span>
+          <br />
+          <span className="info pair2">Resilience</span>
+          <span>
+            :{" "}
+            {cS.resilience.base +
+              cS.resilience.additional[0] +
+              cS.resilience.additional[1]}{" "}
+          </span>
+          <span className="highlightStat">
+            {cS.resilience.additional[0] !== 0
+              ? `[${cS.resilience.additional[0] < 0 ? "" : "+"}${
+                  cS.resilience.additional[0]
+                }] `
+              : null}
+            {cS.resilience.additional[1] !== 0
+              ? `[${cS.resilience.additional[1] < 0 ? "" : "+"}${
+                  cS.resilience.additional[1]
+                }] `
+              : null}
+          </span>
+          <br />
+          <span className="info pair3">Precision</span>
+          <span>
+            :{" "}
+            {cS.precision.base +
+              cS.precision.additional[0] +
+              cS.precision.additional[1]}{" "}
+          </span>
+          <span className="highlightStat">
+            {cS.precision.additional[0] !== 0
+              ? `[${cS.precision.additional[0] < 0 ? "" : "+"}${
+                  cS.precision.additional[0]
+                }] `
+              : null}
+            {cS.precision.additional[1] !== 0
+              ? `[${cS.precision.additional[1] < 0 ? "" : "+"}${
+                  cS.precision.additional[1]
+                }] `
+              : null}
+          </span>
+          <br />
+          <span className="info pair3">Evasion</span>
+          <span>
+            :{" "}
+            {cS.evasion.base +
+              cS.evasion.additional[0] +
+              cS.evasion.additional[1]}{" "}
+          </span>
+          <span className="highlightStat">
+            {cS.evasion.additional[0] !== 0
+              ? `[${cS.evasion.additional[0] < 0 ? "" : "+"}${
+                  cS.evasion.additional[0]
+                }] `
+              : null}
+            {cS.evasion.additional[1] !== 0
+              ? `[${cS.evasion.additional[1] < 0 ? "" : "+"}${
+                  cS.evasion.additional[1]
+                }] `
+              : null}
+          </span>
+          <br />
+          <span className="info pair3">Speed</span>
+          <span>
+            : {cS.speed.base + cS.speed.additional[0] + cS.speed.additional[1]}{" "}
+          </span>
+          <span className="highlightStat">
+            {cS.speed.additional[0] !== 0
+              ? `[${cS.speed.additional[0] < 0 ? "" : "+"}${
+                  cS.speed.additional[0]
+                }] `
+              : null}
+            {cS.speed.additional[1] !== 0
+              ? `[${cS.speed.additional[1] < 0 ? "" : "+"}${
+                  cS.speed.additional[1]
+                }] `
+              : null}
+          </span>
+          <br />
+          <span className="info pair4">Stamina</span>
+          <span>
+            :{" "}
+            {cS.stamina.base +
+              cS.stamina.additional[0] +
+              cS.stamina.additional[1]}{" "}
+          </span>
+          <span className="highlightStat">
+            {cS.stamina.additional[0] !== 0
+              ? `[${cS.stamina.additional[0] < 0 ? "" : "+"}${
+                  cS.stamina.additional[0]
+                }] `
+              : null}
+            {cS.stamina.additional[1] !== 0
+              ? `[${cS.stamina.additional[1] < 0 ? "" : "+"}${
+                  cS.stamina.additional[1]
+                }] `
+              : null}
+          </span>
+          <br />
+          <br />
+        </>
+      );
+    } else {
+      return (
+        <>
+          <span className="a">Loading combat skills...</span>
+        </>
+      );
+    }
   };
 
   return (

@@ -1,12 +1,24 @@
-import React, { useState } from "react";
+import React, { SetStateAction, useState } from "react";
 import "./sidebarstyles.css";
 import { getSubpageTabs } from "../subpage/subpagetabs";
 import SidebarButton from "./sidebarbutton/sidebarbutton.tsx";
 import Subpage from "../subpage/subpage.tsx";
+import { TaskTypes } from "../../scripts/constants/enumerations.ts";
+import TaskOverlay from "../taskoverlay/taskoverlay.tsx";
 
-const Sidebar = () => {
+interface SidebarProps {
+  selectedTask: TaskTypes | null;
+  selectedTab: number;
+  setSelectedTask: React.Dispatch<React.SetStateAction<TaskTypes | null>>;
+  setSelectedTab: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const Sidebar = ({
+  selectedTask,
+  selectedTab,
+  setSelectedTab,
+}: SidebarProps) => {
   const subpageTabs = getSubpageTabs();
-  const [selectedTab, setSelectedTab] = useState(-1);
 
   const handleTabClick = (index: number) => {
     //console.log(`Selected tab is changed to ${index}`);
@@ -21,11 +33,12 @@ const Sidebar = () => {
             key={`SidebarButton_${index}`}
             name={tab}
             isSelected={selectedTab === index}
+            index={index}
             onClick={() => handleTabClick(index)}
           />
         ))}
       </div>
-      <Subpage selectedTab={selectedTab} />
+      <TaskOverlay selectedTask={selectedTask} />
     </div>
   );
 };

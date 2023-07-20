@@ -36,16 +36,13 @@ const PlayerInventory = ({
     setShowTooltip(true);
     setTooltipContent(stringify({ item, slotSubtype }));
   };
-
   const handleSlotLeave = () => {
     setShowTooltip(false);
     setTooltipContent("");
   };
-
   const handleMouseMove = (event: React.MouseEvent) => {
     setCursorPosition({ x: event.clientX, y: event.clientY });
   };
-
   const handleSlotClick = (
     item: ItemProps | null,
     slotPosition: number | string
@@ -97,7 +94,6 @@ const PlayerInventory = ({
   ) : null;
 
   // short
-
   const shortenName = (name: string) => {
     if (name.length > 25) {
       return name.substring(0, 25) + "...";
@@ -107,8 +103,6 @@ const PlayerInventory = ({
 
   // rendering functions for slots
   const renderArmorSlot = (slotName: string) => {
-    // todo : rendering equipped armor, utility
-
     const slotNameKey = slotName as keyof typeof sessInventory.armor;
     const armor = sessInventory.armor[slotNameKey];
     const shortenedName = armor.item ? shortenName(armor.item.name) : " ";
@@ -137,7 +131,6 @@ const PlayerInventory = ({
       </div>
     );
   };
-
   const renderWeaponSlot = (slotName: string) => {
     if (!sessInventory) return; // return if session inventory doesnt exist
 
@@ -175,7 +168,6 @@ const PlayerInventory = ({
       );
     }
   };
-
   const renderFoodSlot = (slotName: string) => {
     const slotNameKey = slotName as keyof typeof sessInventory.equippedFood;
     const food = sessInventory.equippedFood[slotNameKey];
@@ -208,7 +200,6 @@ const PlayerInventory = ({
       );
     }
   };
-
   const renderToolSlots = (slotName: string) => {
     // todo : rendering equipped tools, utility
     if (!sessInventory) return null;
@@ -242,7 +233,43 @@ const PlayerInventory = ({
       </div>
     );
   };
+  const renderWorkspaceSlots = (slotName: string) => {
+    // todo : rendering equipped tools, utility
+    if (!sessInventory) return null;
 
+    const slotNameKey =
+      slotName as keyof typeof sessInventory.equippedWorkspaces;
+    const workspace = sessInventory.equippedWorkspaces[slotNameKey];
+    const shortenedName =
+      workspace && workspace.item ? shortenName(workspace.item.name) : "";
+    const slotSubtype = "workspace";
+
+    const isSelected =
+      selectedSlot &&
+      workspace &&
+      workspace.slotPosition === selectedSlot.slotPosition;
+
+    const slotPosition = `WS_${slotName}`;
+
+    if (workspace != null) {
+      workspace.slotPosition = slotPosition;
+    }
+
+    return (
+      <div
+        key={slotName}
+        id={slotPosition}
+        className={`inv_slot_workspace ${isSelected ? "Selected" : ""}`}
+        ref={(el) => (slotRefs.current[slotName] = el)}
+        onMouseEnter={() => handleSlotHover(workspace.item, slotSubtype)}
+        onMouseLeave={handleSlotLeave}
+        onMouseMove={handleMouseMove}
+        onClick={() => handleSlotClick(workspace.item || null, slotName)}
+      >
+        {shortenedName}
+      </div>
+    );
+  };
   const renderBackpackSlots = () => {
     if (!sessInventory) return null;
 
@@ -368,6 +395,17 @@ const PlayerInventory = ({
                 renderToolSlots(slotName)
               )}
             </div>
+          </div>
+          <div className="inv_main_workspace">
+            <span className="yellowSpan">Workspaces</span>
+            <div className="workspace_grid">
+              {Object.keys(sessInventory.equippedWorkspaces || {}).map(
+                (slotName) => renderWorkspaceSlots(slotName)
+              )}
+            </div>
+            <span className="additionalInfo">
+              Adjust your workspace/locations using the Workspace Tab!
+            </span>
           </div>
           <div className="inv_main_slots">
             <span className="yellowSpan">Backpack Inventory</span>

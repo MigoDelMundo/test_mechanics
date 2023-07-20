@@ -1,0 +1,149 @@
+.AccumulationTaskInterface {
+  grid-column: auto;
+  border: 3px solid rgb(180, 180, 190);
+  border-radius: 10px;
+  padding: 10px;
+  background-color: rgb(16, 16, 9);
+  height: auto;
+}
+
+.ATI_InnerGrid {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 3px;
+}
+
+.ATI_InnerGridCell {
+  display: flex;
+}
+
+.ATI_InnerGridCell.Name {
+  display: block;
+  grid-column: span 3;
+  font-size: 12px;
+}
+
+.ATI_InnerGridCell.Location {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.ATI_InnerGridCell.Change {
+  align-items: center;
+  justify-content: center;
+}
+
+.ATI_InnerGridCell.LoadingBar,
+.ATI_InnerGridCell.SelectChoice {
+  grid-row: span 3;
+  align-items: end;
+  justify-content: center;
+}
+
+.ATI_InnerGridCell.SelectChoice {
+  align-items: center;
+  flex-direction: column;
+}
+
+.SelectButton {
+  width: 40px;
+  height: 40px;
+  background-image: url("../../../../../assets/pictures/arrowicons/loop.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.5;
+}
+
+.SelectButton:hover {
+  opacity: 0.75;
+  user-select: none;
+  cursor: pointer;
+}
+
+.SelectButton.Selected {
+  animation: rotateLoop 2s linear infinite;
+  opacity: 1;
+}
+
+@keyframes rotateLoop {
+  0% {
+    transform: rotate(360deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.ATI_InnerGridCell .Previous {
+  width: 50%;
+  height: 100%;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url("../../../../../assets/pictures/arrowicons/up.png");
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.ATI_InnerGridCell .Next {
+  width: 50%;
+  height: 100%;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url("../../../../../assets/pictures/arrowicons/down.png");
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.ATI_InnerGridCell .Next:hover,
+.ATI_InnerGridCell .Previous:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.ATI_Highlight {
+  font-weight: bold;
+  color: rgb(255, 219, 40);
+}
+
+.TheActualLoadingBar {
+  width: 40%;
+  height: calc(100% - 16px);
+  background-color: rgb(255, 165, 0);
+  border-radius: 5px;
+  margin: 8px;
+  animation: sampleAnimationOnly 5s linear infinite;
+}
+
+.TheActualLoadingBar.Unselected {
+  animation: none;
+  height: 0;
+}
+
+@keyframes sampleAnimationOnly {
+  0% {
+    height: calc(0% - 16px);
+    background-color: rgb(56, 0, 0);
+  }
+  60% {
+    background-color: rgb(255, 165, 0);
+  }
+  100% {
+    height: calc(100% - 16px);
+    background-color: rgb(15, 220, 128);
+  }
+}

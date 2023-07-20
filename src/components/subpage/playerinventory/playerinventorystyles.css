@@ -29,7 +29,7 @@
 .inv_grid {
   display: grid;
   grid-template-columns: 300px 150px 150px 420px;
-  grid-auto-rows: 275px 110px max-content;
+  grid-auto-rows: 275px 130px max-content;
   height: 100vh;
   color: white;
 }
@@ -51,10 +51,20 @@
   padding: 15px;
 }
 
-.inv_main_slots,
-.inv_main_tools {
+.inv_main_slots {
   padding: 15px;
   grid-column: span 4;
+}
+
+.inv_main_tools {
+  padding: 15px;
+  grid-column: span 3;
+}
+
+.inv_main_workspace {
+  margin-right: 100px;
+  padding: 15px;
+  grid-column: span 1;
 }
 
 .inv_slot_armors {
@@ -81,6 +91,7 @@
 .inv_slot_weapon,
 .inv_slot_food,
 .inv_slot_tool,
+.inv_slot_workspace,
 .inv_slot {
   font-size: 11px;
   background-color: transparent;
@@ -123,9 +134,11 @@
 .inv_slot_weapon:hover,
 .inv_slot_food:hover,
 .inv_slot_tool:hover,
+.inv_slot_workspace:hover,
 .inv_slot:hover {
   border-color: rgb(255, 219, 40);
   color: rgb(255, 219, 40);
+  cursor: pointer;
 }
 
 .inv_slot_armor.necklace {
@@ -174,6 +187,10 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.inv_slot_workspace {
+  background-image: url("../../../assets/pictures/toolicons/workspace.png");
+  background-color: rgba(0, 0, 0, 0.5);
+}
 .inv_slot_armor.core {
   opacity: 0;
 }
@@ -206,11 +223,20 @@
   user-select: none;
 }
 
-.tool_grid {
+.tool_grid,
+.workspace_grid {
   display: grid;
-  grid-template-columns: repeat(11, 80px);
+  grid-template-columns: repeat(10, 70px);
+  grid-template-rows: repeat(1, 70px);
   column-gap: 20px;
-  height: 100%;
+  row-gap: 20px;
+  width: 350px;
+  height: 90px;
+  overflow-x: scroll;
+}
+
+.tool_grid {
+  width: 530px;
 }
 
 .Selected,
@@ -245,4 +271,10 @@
 .BackpackSubgrid .subgridbutton:hover {
   color: rgb(255, 219, 40);
   border-color: rgb(255, 219, 40);
+}
+
+.additionalInfo {
+  font-style: italic;
+  color: rgb(108, 108, 110);
+  font-size: 12px;
 }

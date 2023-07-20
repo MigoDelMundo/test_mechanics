@@ -1,0 +1,17 @@
+.DevelopmentMain {
+  width: 100%;
+  user-select: none;
+}
+
+.DevelopmentTitleHeader {
+  width: 100%;
+  text-align: center;
+  color: rgb(15, 220, 128);
+}
+
+.DevelopmentSubtitle {
+  font-style: italic;
+  color: rgb(108, 108, 110);
+  font-size: 13px;
+  width: 50%;
+}

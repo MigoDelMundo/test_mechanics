@@ -8,26 +8,23 @@ import {
   ToolProps,
   WeaponProps,
 } from "../../../../scripts/constants/interfaces/itemprops";
-import { resetMainSave } from "../../../../scripts/mechanics/mainsavelogic";
 import {
   equipArmorPiece,
   checkItemIfEquipped,
   removeArmorPiece,
   equipToolPiece,
   removeToolPiece,
-  grantToolToSession,
   equipWeaponPiece,
   removeWeaponPiece,
-  findItemLocation,
   eradicateItem,
   equipFoodPiece,
   removeFoodPiece,
 } from "../../../../scripts/mechanics/itemlogic";
-import { grantXPToProficiency } from "../../../../scripts/mechanics/proficiencylogic";
 import { TaskTypes } from "../../../../scripts/constants/enumerations";
-import { sessionMainSave } from "../../../../scripts/player/sessionmainsave";
-import { stringify } from "flatted";
-import { SlotProps } from "../../../../scripts/constants/interfaces/slotprops";
+import {
+  changeWorkspaceToNext,
+  changeWorkspaceToPrevious,
+} from "../../../../scripts/mechanics/workspacelogic";
 
 interface SlotMenuProps {
   item: ItemProps;
@@ -200,6 +197,7 @@ const SlotMenu = ({ item, setSelectedSlot }: SlotMenuProps) => {
       {checkIfEquippable(item)}
       {checkIfUsable(item)}
       {checkIfDeletable(item)}
+      <br />
     </div>
   );
 };

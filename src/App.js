@@ -10,20 +10,12 @@ import './scripts/mechanics/itemupdatinglogic.tsx'
 import './scripts/player/testingscript.tsx';
 
 // component imports
-import Header from './components/header/header.tsx';
-import Sidebar from './components/sidebar/sidebar.tsx';
-import Subpage from './components/subpage/subpage.tsx';
-import { CoverScreen } from './components/coverscreen/coverscreen.tsx';
-
+import Main from './components/main/main.tsx';
 
 function App() {
+
   return (
-    <div className="App">
-       <Header />
-       <Sidebar />
-       <Subpage />
-       <CoverScreen />
-    </div>
+    <Main />
   );
 }
 

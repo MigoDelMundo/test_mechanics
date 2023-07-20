@@ -1,5 +1,5 @@
 import "./subpagestyles.css";
-import React, { useEffect, useState } from "react";
+import React, { SetStateAction, useEffect, useState } from "react";
 
 import { getSubpageTabs } from "./subpagetabs";
 import PlayerInventory from "./playerinventory/playerinventory";
@@ -7,8 +7,22 @@ import { ItemProps } from "../../scripts/constants/interfaces/itemprops";
 import { Adventurer } from "./adventurer/adventurer";
 import { Settings } from "./settings/settings";
 import { Default } from "./default/default";
+import Accumulation from "./taskpages/accumulation/accumulation";
+import Development from "./taskpages/development/development";
+import Researching from "./taskpages/researching/researching";
+import { TaskTypes } from "../../scripts/constants/enumerations";
 
-const Subpage = ({ selectedTab }: { selectedTab: number }) => {
+interface SubpageProps {
+  selectedTab: number;
+  selectedTask: TaskTypes | null;
+  setSelectedTask: React.Dispatch<SetStateAction<TaskTypes | null>>;
+}
+
+const Subpage = ({
+  selectedTab,
+  selectedTask,
+  setSelectedTask,
+}: SubpageProps) => {
   const [selectedSlot, setSelectedSlot] = useState<ItemProps | null>(null);
 
   const subpageTabs = getSubpageTabs();
@@ -28,15 +42,26 @@ const Subpage = ({ selectedTab }: { selectedTab: number }) => {
       );
       break;
     case 2: // Player Inventory
-      content = subpageTabs[selectedTab];
+      content = (
+        <Accumulation
+          selectedTask={selectedTask}
+          setSelectedTask={setSelectedTask}
+        />
+      );
       break;
     case 3: // Choose Action/Task
-      content = subpageTabs[selectedTab];
+      content = <Development />;
       break;
     case 4: // Automation
+      content = <Researching />;
+      break;
+    case 5:
       content = subpageTabs[selectedTab];
       break;
-    case 5: // Settings
+    case 6:
+      content = subpageTabs[selectedTab];
+      break;
+    case 7: // Settings
       content = <Settings />;
       break;
     default: // Default

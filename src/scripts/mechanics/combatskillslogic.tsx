@@ -64,6 +64,9 @@ export const calculateAdditionalsFromWeapons = () => {
   for (const a in sessionWeapons) {
     const aK = a as keyof typeof sessionWeapons;
     const cA = sessionWeapons[aK];
+    if (!cA) {
+      continue;
+    }
     const cB = (cA.item as WeaponProps)
       ? (cA.item as WeaponProps).bonusAttribute
       : null;

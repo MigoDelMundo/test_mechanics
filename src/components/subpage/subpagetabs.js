@@ -1,9 +1,11 @@
 var subpageTabs = [
   "Adventurer", 
   "Inventory", 
-  "???", // Cultivation
-  "???", // Tasks
-  "???", // Automation (?)
+  "Accumulation",
+  "Development",
+  "Researching",
+  "🧘‍♂️🙏☯️", // Ascension
+  "🧑‍🤝‍🧑🗣️🏆", // Camaraderie
   "Settings"];
 
 export const setSubpageTabs = (name) => {

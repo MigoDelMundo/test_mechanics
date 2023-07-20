@@ -1,0 +1,97 @@
+.AccumulationTaskInformation {
+  border: 3px solid rgb(180, 180, 190);
+  border-radius: 10px;
+  background-color: rgb(16, 16, 9);
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  width: auto;
+  height: auto;
+  padding: 15px;
+  overflow-y: scroll;
+}
+
+.TaskSubtitle {
+  width: 100%;
+  text-align: center;
+  color: rgb(255, 219, 40);
+  font-size: 12px;
+  font-style: italic;
+}
+
+.TaskTitle {
+  font-size: 18px;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  padding: 0px 0px 10px;
+}
+
+.TaskTitle.Color1 {
+  color: rgb(139, 69, 19);
+}
+
+.TaskDivision {
+  width: 95%;
+  min-height: 200px;
+  display: grid;
+  grid-template-columns: 40% 60%;
+  grid-template-rows: 165px 60px;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.TaskDivisionCell {
+  display: block;
+  font-size: 12px;
+}
+
+.TaskDivisionCell.G2 {
+  overflow-y: scroll;
+}
+
+.TaskDivisionCell.G3 {
+  border: 2px solid rgb(65, 65, 70);
+  padding: 3px;
+  height: 100%;
+  grid-column: span 2;
+}
+
+.SpanInfo {
+  color: rgb(29, 152, 111);
+  font-weight: bold;
+}
+
+.LootTable {
+  width: 100%;
+  min-height: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+}
+
+.LootTableGrid {
+  display: block;
+  border: 2px solid rgba(105, 105, 110, 0);
+  border-radius: 10px;
+  padding: 3px;
+}
+
+.LootTableGrid.TopRow {
+  text-align: center;
+  background-color: rgb(45, 45, 50);
+  border-color: rgb(105, 105, 110);
+  font-size: 12px;
+}
+
+.DefaultText {
+  width: calc(100%-40px);
+  height: 100%;
+  padding: 0px 20px 0px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  color: rgb(65, 65, 70);
+  font-style: italic;
+  font-size: 14px;
+}

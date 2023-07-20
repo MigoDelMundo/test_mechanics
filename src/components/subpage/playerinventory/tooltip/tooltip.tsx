@@ -11,6 +11,7 @@ import {
   ToolProps,
   MaterialProps,
   FoodProps,
+  WorkspaceProps,
 } from "../../../../scripts/constants/interfaces/itemprops";
 
 import { sessionMainSave } from "../../../../scripts/player/sessionmainsave";
@@ -271,6 +272,24 @@ const Tooltip = ({ content, position }: any) => {
           <br />
         </div>
       );
+    } else if (type === "workspace") {
+      const locationItem = item as WorkspaceProps;
+      const { workspaceCategory, workspaceName, workspacePower } = {
+        ...locationItem,
+      };
+
+      tooltipText = (
+        <div>
+          <span className="tooltipInfo">Name: </span>
+          {name} <br />
+          <span className="tooltipInfo">Task Category: </span>
+          {capitalizeString(workspaceCategory)} <br />
+          <span className="tooltipInfo">Workspace Category: </span>
+          {capitalizeString(workspaceName)} <br />
+          <span className="tooltipInfo">Description: </span>
+          {description} <br />
+        </div>
+      );
     }
   } else if (item === null || item === undefined) {
     if (slotSubtype === "armor") {
@@ -282,6 +301,9 @@ const Tooltip = ({ content, position }: any) => {
     } else if (slotSubtype === "tool") {
       tooltipText =
         "An empty tool slot that can be equipped with a certain type of tool.";
+    } else if (slotSubtype === "workspace") {
+      tooltipText =
+        "An empty workspace slot that can be filled with a workspace of a certain type of task.";
     } else {
       tooltipText = "An unused backpack slot.";
     }

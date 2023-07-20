@@ -57,3 +57,17 @@ Day 36: Proper UI changes on Settings Tab, censored the sidebar tabs for now, up
 Day 36 part 2: Added some code for food such as having unique properties like maxFood and foodSize. Both are related in a way the bigger the food, the less you can carry. Added also a save button in settings for obvious purposes.
 
 Day 37: Equipping and deequipping of food implemented. Added a new granting function specifically for food (Developer notes: It took me 4 rewrites in one day because I couldn't get the logic down, the first 3 attempts had me so confused and the 3rd specifically had my head aching so bad I had to let off steam in the gym). Added a cover screen when loading the website, and changed the default tab state to be -1 (which means by default, no tab will be open immediately). Updated the design of the sidebar as well as header.
+
+Day 38: Started working on workspaces: added a property for the mainsave which equips workspaces, worked on the tooltip rendering as well as the inventory rendering. Added all dictionaries needed for all task types (and some have more than two workspaces). 
+
+Day 39: Added a loot table for certain tasks, decided to take a step back and replan the tasks and actions. Removed a dictionary which was a duplicate of a previous dictionary.
+
+Day 40: Added more configuration on workspace items, added three new pages which are Accumulation, Development and Researching. Added the first design for the Accumulation tasks action which can be found under Accumulation. Eventually modularized the accumulation task design and added a tooltip for workspace in Inventory tab. Player can now switch in between the current accumulation tasks. 
+
+Day 41: Accumulation now can switch in between workspaces as long as you have unlocked it. For that, I added a locationUnlocks property which would be the storage for the unlocked workspaces/locations of the player. The arrow buttons for AccumulationTasks now only appear once you the right locationUnlock permission for the next/previous workspace (meaning, if you didn't have the workspace unlocked, you don't see the button that will take you to the next workspace.)
+
+Day 41 part 2: Added information on the Accumulation Task Information tab (temporarily on Woodchopping for now) as well as the game loop to set for the resource gathering (with the use of useEffect). Developer note: I'm surprised by how useEffect works.
+
+Day 42: Added TaskOverlay, did some component reorganization, lifted some states up, did some random fixes I guess. Went a step back and planned the next few UIs after finishing up Inventory (for now). Added more features for the Task Information panel, such as being able to display the tool, toolpower, workspace, workspace power, and show the full loot table that you can earn per iteration. 
+
+Day 43: Fixed a bug regarding the undefined tools/workspaces (basically unequipped workspaces or tools) which crashed the whole accumulation tab. Complete the task information for accumulation tasks, added a lot of fixes and optimizations, and added some modularization because I was scared of the repetition. Task information now displays the number of resource you have acquired within the loot table. Tasks now disappear if you don't have at least 1 tool power or 1 workspace power (basically, you need the weakest tool and the weakest workspace before you can start doing any tasks). Deployed another production build for the gh pages. 

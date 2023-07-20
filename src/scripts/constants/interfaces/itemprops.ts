@@ -7,6 +7,8 @@ import {
   TaskTypes,
   RarityTypes,
   FoodSizeTypes,
+  WorkspaceNames,
+  WorkspaceCategoryTypes,
 } from "../enumerations";
 
 export interface ItemProps {
@@ -15,7 +17,7 @@ export interface ItemProps {
   rarity: RarityTypes; // what tier does the item belong to? (tba tiers)
   description: string; // description for UI and inventory
   amount: number; // self explanatory
-  statRequirement: Record<string, number> | Record<string, number>[];
+  statRequirement: Record<string, number>;
   // either a single stat requirement or multiple stat requirements
   coinValue: number; // value when sold to NPCs
   canUse: Boolean; // can you use it as in consumed?
@@ -57,7 +59,15 @@ export interface ToolProps extends ItemProps {
 
 export interface MaterialProps extends ItemProps {}
 
-export interface WorkspaceProps extends ItemProps {}
+export interface WorkspaceProps extends ItemProps {
+  workspaceCategory: WorkspaceCategoryTypes;
+  workspaceName: WorkspaceNames;
+  workspacePower: number;
+  loot?: {
+    lootTable?: ResourceProps[];
+    lootChance?: number[];
+  };
+}
 
 export interface FoodProps extends ItemProps {
   foodSize: FoodSizeTypes;

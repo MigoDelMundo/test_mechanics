@@ -4,16 +4,22 @@ import "./sidebarbuttonstyles.css";
 interface SidebarButtonProps {
   name: String;
   isSelected: boolean;
+  index: number;
   onClick: MouseEventHandler;
 }
 
-const SidebarButton = ({ name, isSelected, onClick }: SidebarButtonProps) => {
+const SidebarButton = ({
+  name,
+  isSelected,
+  index,
+  onClick,
+}: SidebarButtonProps) => {
   const buttonClassName = isSelected
     ? "SidebarButton Selected"
     : "SidebarButton";
 
   return (
-    <div className={buttonClassName} onClick={onClick}>
+    <div className={`Button${index} ${buttonClassName}`} onClick={onClick}>
       {name}
     </div>
   );

@@ -3,6 +3,7 @@ import {
   FoodSlotTypes,
   TaskTypes,
   WeaponSlotTypes,
+  WorkspaceNames,
 } from "./enumerations";
 import { InventoryProps } from "./interfaces/inventoryprops";
 
@@ -123,6 +124,58 @@ const defaultInventory: InventoryProps = {
       slotFor: TaskTypes.Researching,
       dictionaryID: null,
       amount: 0,
+    },
+  },
+  equippedWorkspaces: {
+    woodchopping: {
+      slotFor: WorkspaceNames.Woodchopping,
+      dictionaryID: "21_000001",
+      amount: 1,
+    },
+    farming: {
+      slotFor: WorkspaceNames.Farming,
+      dictionaryID: null,
+      amount: 1,
+    },
+    mining: {
+      slotFor: WorkspaceNames.Mining,
+      dictionaryID: "24_000001",
+      amount: 1,
+    },
+    herbGathering: {
+      slotFor: WorkspaceNames.HerbGathering,
+      dictionaryID: "27_000001",
+      amount: 1,
+    },
+    livestockTending: {
+      slotFor: WorkspaceNames.LivestockTending,
+      dictionaryID: null,
+      amount: 1,
+    },
+    fishing: {
+      slotFor: WorkspaceNames.Fishing,
+      dictionaryID: "22_000001",
+      amount: 1,
+    },
+    cooking: {
+      slotFor: WorkspaceNames.Cooking,
+      dictionaryID: "23_000002",
+      amount: 1,
+    },
+    crafting: {
+      slotFor: WorkspaceNames.Crafting,
+      dictionaryID: null,
+      amount: 1,
+    },
+    metalcrafting: {
+      slotFor: WorkspaceNames.Metalcrafting,
+      dictionaryID: null,
+      amount: 1,
+    },
+    researching: {
+      slotFor: WorkspaceNames.Researching,
+      dictionaryID: null,
+      amount: 1,
     },
   },
 };

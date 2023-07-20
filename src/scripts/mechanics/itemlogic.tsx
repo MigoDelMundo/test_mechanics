@@ -13,11 +13,14 @@ import {
   SlotProps,
   WeaponSlotProps,
 } from "../constants/interfaces/slotprops";
-import { DictionaryArray } from "../dictionaries/dictionariesarray";
-import { HelmetDictionary } from "../dictionaries/itemdictionaries/armordictionary/helmetdictionary";
-import { NecklaceDictionary } from "../dictionaries/itemdictionaries/armordictionary/necklacedictionary";
-import { CookedFoodDictionary } from "../dictionaries/itemdictionaries/productdictionary.ts/cookedfooddictionary";
-import { MaterialDictionary } from "../dictionaries/itemdictionaries/productdictionary.ts/materialdictionary";
+import {
+  DictionaryArray,
+  DictionaryObject,
+} from "../dictionaries/dictionariesarray";
+import { HelmetDictionary } from "../dictionaries/itemdictionaries/armordictionaries/helmetdictionary";
+import { NecklaceDictionary } from "../dictionaries/itemdictionaries/armordictionaries/necklacedictionary";
+import { CookedFoodDictionary } from "../dictionaries/itemdictionaries/productdictionary/cookedfooddictionary";
+import { MaterialDictionary } from "../dictionaries/itemdictionaries/productdictionary/materialdictionary";
 import { CropDictionary } from "../dictionaries/itemdictionaries/resourcedictionaries/cropdictionary";
 import { HerbDictionary } from "../dictionaries/itemdictionaries/resourcedictionaries/herbdictionary";
 import { LivestockDictionary } from "../dictionaries/itemdictionaries/resourcedictionaries/livestockdictionary";
@@ -892,4 +895,39 @@ export const eradicateItem = (item: ItemProps) => {
   specificItem.item = undefined;
 
   console.log(specificItem);
+};
+
+// dictionary checks
+export const checkCertainDictionaryContents = (
+  dictionaryOrdinality: number
+) => {
+  for (let h = 0; h < Object.keys(DictionaryObject).length; h++) {
+    const convertedKey = h as keyof typeof DictionaryObject;
+    const convertedParameter =
+      dictionaryOrdinality as keyof typeof DictionaryObject;
+    if (convertedKey === convertedParameter) {
+      const dictionaryInQuestion = DictionaryObject[convertedParameter];
+      console.log(`Check contents of Dictionary ${h}`);
+      for (const dictKey in dictionaryInQuestion) {
+        console.log(
+          `${dictKey.slice(3)} : ${dictionaryInQuestion[dictKey].name}`
+        );
+      }
+      console.log(`-*-*-*-*-*-*-*-*-*-`);
+    }
+  }
+};
+export const getDictionaryItemDetails = (dictionaryID: string) => {
+  const prefix = Number(dictionaryID.slice(0, 2));
+  const certainDict = DictionaryObject[prefix as keyof typeof DictionaryObject];
+  console.log(certainDict[dictionaryID]);
+  return certainDict[dictionaryID];
+};
+
+export const findItemInBackpack = (dictionaryID: string) => {
+  const sessionBackpack = sessionInventory.backpack;
+  const foundSlot = sessionBackpack.find(
+    (slot) => slot.dictionaryID === dictionaryID
+  );
+  return foundSlot;
 };

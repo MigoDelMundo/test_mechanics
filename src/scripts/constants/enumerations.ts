@@ -40,6 +40,25 @@ export enum WeaponTypes {
   Wand = "wand", // fast attack speed, low magic damage
   Staff = "staff", // medium attack speed, medium magic damage
 }
+export enum WorkspaceNames {
+  Woodchopping = "forest",
+  Farming = "farmland",
+  Mining = "cave",
+  HerbGathering = "grove",
+  LivestockTending = "pasture",
+  Fishing = "aquascape",
+  Cooking = "bakery",
+  Crafting = "workshop",
+  Metalcrafting = "smelter",
+  Researching = "scholarium",
+}
+
+export enum WorkspaceCategoryTypes {
+  Acc = "accumulation",
+  Dev = "development",
+  Res = "research",
+}
+
 // subitem properties
 export enum FoodSizeTypes {
   s = "small",

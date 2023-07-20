@@ -6,7 +6,7 @@ import { sessionMainSave } from "../player/sessionmainsave";
 
 // mechanic that a) rmeoves items on the inventory on leave, and b) adds updated items on join.
 
-const removeCurrentItemOnSlot = (targetedSlot: SlotProps) => {
+export const removeCurrentItemOnSlot = (targetedSlot: SlotProps) => {
   if (targetedSlot.item !== undefined) {
     // console.log(`Pre-remove: ${targetedSlot.item?.name}`);
     targetedSlot.item = undefined;
@@ -14,7 +14,7 @@ const removeCurrentItemOnSlot = (targetedSlot: SlotProps) => {
   }
 };
 
-const reloadCurrentItemOnSlot = (targetedSlot: SlotProps) => {
+export const reloadCurrentItemOnSlot = (targetedSlot: SlotProps) => {
   if (targetedSlot.item == undefined) {
     if (targetedSlot.dictionaryID !== null) {
       // console.log(`Pre-add: ${targetedSlot.item}`);
@@ -58,7 +58,21 @@ export const reloadItemsOnInventory = () => {
     reloadCurrentItemOnSlot(sessionInventory.equippedTools[eTK]);
   }
 
-  // for loop for weapons
+  for (const eW in sessionInventory.equippedWeapons) {
+    const eWK = eW as keyof typeof sessionInventory.equippedWeapons;
+    removeCurrentItemOnSlot(sessionInventory.equippedWeapons[eWK]);
+    reloadCurrentItemOnSlot(sessionInventory.equippedWeapons[eWK]);
+  }
 
-  // for loop for food
+  for (const eF in sessionInventory.equippedFood) {
+    const eFK = eF as keyof typeof sessionInventory.equippedFood;
+    removeCurrentItemOnSlot(sessionInventory.equippedFood[eFK]);
+    reloadCurrentItemOnSlot(sessionInventory.equippedFood[eFK]);
+  }
+
+  for (const eWS in sessionInventory.equippedWorkspaces) {
+    const eWSK = eWS as keyof typeof sessionInventory.equippedWorkspaces;
+    removeCurrentItemOnSlot(sessionInventory.equippedWorkspaces[eWSK]);
+    reloadCurrentItemOnSlot(sessionInventory.equippedWorkspaces[eWSK]);
+  }
 };
