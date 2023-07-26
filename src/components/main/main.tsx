@@ -1,4 +1,12 @@
 import { TaskTypes } from "../../scripts/constants/enumerations";
+import {
+  ResourceProps,
+  WorkspaceProps,
+} from "../../scripts/constants/interfaces/itemprops";
+import { WorkspaceSlotProps } from "../../scripts/constants/interfaces/slotprops";
+import { grantResourceToSession } from "../../scripts/mechanics/itemlogic";
+import { grantXPToProficiency } from "../../scripts/mechanics/proficiencylogic";
+import { sessionMainSave } from "../../scripts/player/sessionmainsave";
 import { CoverScreen } from "../coverscreen/coverscreen";
 import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
@@ -7,7 +15,6 @@ import "./mainstyles.css";
 import React, { useEffect, useState } from "react";
 
 const Main = () => {
-  let number: number = 0;
   const [selectedTab, setSelectedTab] = useState(-1);
   const [selectedTask, setSelectedTask] = useState<TaskTypes | null>(null);
 
@@ -15,10 +22,61 @@ const Main = () => {
     let taskInterval: NodeJS.Timeout | null = null;
 
     if (selectedTask !== null) {
-      taskInterval = setInterval(() => {
-        number++;
-        console.log(`Resource for ${selectedTask}: ${number}`);
-      }, 5000);
+      const currentProficiency =
+        sessionMainSave.value.proficiency[selectedTask];
+      const currentWorkspace =
+        sessionMainSave.value.inventory.equippedWorkspaces[selectedTask];
+      const currentWorkspaceResources = (
+        currentWorkspace.item as WorkspaceProps
+      ).loot?.lootTable;
+      const currentWorkspaceProbabilities = (
+        currentWorkspace.item as WorkspaceProps
+      ).loot?.lootChance;
+      const currentWorkspaceXP = (currentWorkspace.item as WorkspaceProps).loot
+        ?.lootXP;
+
+      switch (selectedTask) {
+        case TaskTypes.Farming:
+        case TaskTypes.Fishing:
+        case TaskTypes.HerbGathering:
+        case TaskTypes.LivestockTending:
+        case TaskTypes.Mining:
+        case TaskTypes.Woodchopping:
+          const giveResourceOnProbability = (
+            item: ResourceProps,
+            probability: number,
+            xpGiven: number
+          ) => {
+            const desiredProbability = probability / 100;
+            const randomProbability = Math.random();
+
+            if (randomProbability <= desiredProbability) {
+              console.log(`Bingo! You got yourself a ${item.name}!`);
+              const ordinality = parseInt(item.dictionaryID.split("_")[1], 10);
+              grantResourceToSession(item.resourceType, ordinality, 1);
+              grantXPToProficiency(selectedTask, xpGiven);
+            }
+          };
+
+          taskInterval = setInterval(() => {
+            if (
+              currentWorkspaceXP &&
+              currentWorkspaceResources &&
+              currentWorkspaceProbabilities
+            ) {
+              for (let i = 0; i < currentWorkspaceResources?.length; i++) {
+                giveResourceOnProbability(
+                  currentWorkspaceResources[i],
+                  currentWorkspaceProbabilities[i],
+                  currentWorkspaceXP[i]
+                );
+              }
+            }
+          }, 5000);
+          break;
+        default:
+          return;
+      }
     }
 
     return () => {

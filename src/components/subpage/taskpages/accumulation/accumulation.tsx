@@ -82,12 +82,12 @@ const Accumulation = ({ selectedTask, setSelectedTask }: AccumulationProps) => {
       <div className="AccumulationMain">
         <h2 className="AccumulationTitleHeader">- Accumulation -</h2>
         <span className="AccumulationSubtitle">
-          Pick an action to do in order to gather resources you can use to
-          create better items and materials. You can always change the location
-          of your task in order to gather higher ingredients unavailable in your
-          current location. Also, the loading animation is delayed by a second
-          so your resource would always be obtained before the loading bar
-          reaches its peak!
+          One must gather resources in order to survive and make a name for
+          themselves. Whether it would be lumber, stone or crops, all is useful
+          in empowering oneself. You can pick a tab below (once you have
+          unlocked the right tool and workspace) and continually obtain resource
+          automatically. Do note that you are only able to do 1 task at a time,
+          so pick wisely.
         </span>
         <div className="AccumulationTaskList">
           {checkToolAndWorkspace(TaskTypes.Woodchopping) && (
@@ -95,6 +95,7 @@ const Accumulation = ({ selectedTask, setSelectedTask }: AccumulationProps) => {
               taskFor={TaskTypes.Woodchopping}
               isSelected={selectedAccumulation === TaskTypes.Woodchopping}
               selectedTask={selectedTask}
+              borderColor="#8B4513"
               setSelectedTask={setSelectedTask}
               setSelectedAccumulation={setSelectedAccumulation}
               handleSelectedAccumulation={handleSelectedAccumulation}
@@ -105,6 +106,7 @@ const Accumulation = ({ selectedTask, setSelectedTask }: AccumulationProps) => {
               taskFor={TaskTypes.Mining}
               isSelected={selectedAccumulation === TaskTypes.Mining}
               selectedTask={selectedTask}
+              borderColor="#696969"
               setSelectedTask={setSelectedTask}
               setSelectedAccumulation={setSelectedAccumulation}
               handleSelectedAccumulation={handleSelectedAccumulation}
@@ -116,6 +118,7 @@ const Accumulation = ({ selectedTask, setSelectedTask }: AccumulationProps) => {
               taskFor={TaskTypes.HerbGathering}
               isSelected={selectedAccumulation === TaskTypes.HerbGathering}
               selectedTask={selectedTask}
+              borderColor="#6AB023"
               setSelectedTask={setSelectedTask}
               setSelectedAccumulation={setSelectedAccumulation}
               handleSelectedAccumulation={handleSelectedAccumulation}
@@ -127,6 +130,7 @@ const Accumulation = ({ selectedTask, setSelectedTask }: AccumulationProps) => {
               taskFor={TaskTypes.LivestockTending}
               isSelected={selectedAccumulation === TaskTypes.LivestockTending}
               selectedTask={selectedTask}
+              borderColor="#8B4513"
               setSelectedTask={setSelectedTask}
               setSelectedAccumulation={setSelectedAccumulation}
               handleSelectedAccumulation={handleSelectedAccumulation}
@@ -138,6 +142,7 @@ const Accumulation = ({ selectedTask, setSelectedTask }: AccumulationProps) => {
               taskFor={TaskTypes.Fishing}
               isSelected={selectedAccumulation === TaskTypes.Fishing}
               selectedTask={selectedTask}
+              borderColor="#008080"
               setSelectedTask={setSelectedTask}
               setSelectedAccumulation={setSelectedAccumulation}
               handleSelectedAccumulation={handleSelectedAccumulation}
@@ -148,6 +153,7 @@ const Accumulation = ({ selectedTask, setSelectedTask }: AccumulationProps) => {
               taskFor={TaskTypes.Farming}
               isSelected={selectedAccumulation === TaskTypes.Farming}
               selectedTask={selectedTask}
+              borderColor="#00FF00"
               setSelectedTask={setSelectedTask}
               setSelectedAccumulation={setSelectedAccumulation}
               handleSelectedAccumulation={handleSelectedAccumulation}

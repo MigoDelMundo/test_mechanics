@@ -15,7 +15,7 @@ const proficiencyColors: ProficiencyColors = {
   fishing: "#008080",
   herbgathering: "#6AB023",
   livestocktending: "#8B4513",
-  metalcrafting: "#B8860B",
+  metalcrafting: "#A0A0A0",
   mining: "#696969",
   researching: "#2E8B57",
   woodchopping: "#8B4513",

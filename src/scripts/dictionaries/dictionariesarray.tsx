@@ -12,6 +12,7 @@ import { AxeDictionary } from "./itemdictionaries/tooldictionary/axedictionary";
 import { BasketDictionary } from "./itemdictionaries/tooldictionary/basketdictionary";
 import { CookingKitDictionary } from "./itemdictionaries/tooldictionary/cookingkitdictionary";
 import { CrookDictionary } from "./itemdictionaries/tooldictionary/crookdictionary";
+import FigurineDictionary from "./itemdictionaries/tooldictionary/figurinedictionary";
 import { FishingRodDictionary } from "./itemdictionaries/tooldictionary/fishingroddictionary";
 import { HoeDictionary } from "./itemdictionaries/tooldictionary/hoedictionary";
 import { PickaxeDictionary } from "./itemdictionaries/tooldictionary/pickaxedictionary";
@@ -31,30 +32,6 @@ import { WorkshopDictionary } from "./itemdictionaries/workspacedictionaries/wor
 
 // sorted by chronological order
 
-export const DictionaryArray = [
-  LumberDictionary,
-  MineralDictionary,
-  AxeDictionary,
-  NecklaceDictionary,
-  HelmetDictionary,
-  BasketDictionary,
-  HoeDictionary,
-  PickaxeDictionary,
-  CrookDictionary,
-  FishingRodDictionary,
-  CookingKitDictionary,
-  SmithingKitDictionary,
-  SwordDictionary,
-  ShieldDictionary,
-  MaterialDictionary,
-  CropDictionary,
-  LivestockDictionary,
-  HerbDictionary,
-  UnderwaterDictionary,
-  CookedFoodDictionary,
-  ForestDictionary,
-];
-
 export const DictionaryObject = {
   // armors
   4: NecklaceDictionary,
@@ -69,6 +46,7 @@ export const DictionaryObject = {
   10: FishingRodDictionary,
   11: CookingKitDictionary,
   12: SmithingKitDictionary,
+  31: FigurineDictionary,
 
   // weapons
   13: SwordDictionary,

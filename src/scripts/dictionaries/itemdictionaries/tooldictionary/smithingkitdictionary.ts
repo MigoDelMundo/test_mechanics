@@ -24,13 +24,13 @@ export const SmithingKitDictionary: Record<string, ToolProps> = {
     bonusAttribute: {},
   },
   "12_000002": {
-    name: "Stone-tier Smithing Kit",
+    name: "Stone-Aided Smithing Kit",
     type: ItemTypes.Tool,
-    rarity: RarityTypes.tier1,
+    rarity: RarityTypes.tier2,
     description:
       "A primitive smithing kit, but you are confident it can do its job well.",
     amount: 0,
-    statRequirement: { metalcrafting: 0 },
+    statRequirement: { metalcrafting: 12 },
     coinValue: 0,
     canUse: false,
     canDelete: true,

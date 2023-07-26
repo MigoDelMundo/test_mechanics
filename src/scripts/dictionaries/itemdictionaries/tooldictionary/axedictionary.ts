@@ -30,7 +30,7 @@ export const AxeDictionary: Record<string, ToolProps> = {
     description:
       "An axe made from the lumber you retrieved on the forest. Easy to handle, easy to swing, but you wished it were a bit more powerful.",
     amount: 0,
-    statRequirement: { woodchopping: 5 },
+    statRequirement: { woodchopping: 1 },
     coinValue: 0,
     canUse: false,
     canDelete: false,
@@ -41,9 +41,9 @@ export const AxeDictionary: Record<string, ToolProps> = {
     bonusAttribute: {},
   },
   "03_000003": {
-    name: "Stone Axe",
+    name: "Stone-Aided Axe",
     type: ItemTypes.Tool,
-    rarity: RarityTypes.tier1,
+    rarity: RarityTypes.tier2,
     description:
       "An axe reinforced by stone, making it more durable and powerful than it's predecessor.",
     amount: 0,

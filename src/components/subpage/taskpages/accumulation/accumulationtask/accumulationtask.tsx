@@ -25,6 +25,7 @@ interface AccumulationTaskProps {
   taskFor: TaskTypes;
   isSelected: boolean;
   selectedTask: TaskTypes | null;
+  borderColor: string;
   setSelectedTask: React.Dispatch<React.SetStateAction<TaskTypes | null>>;
   setSelectedAccumulation: React.Dispatch<SetStateAction<TaskTypes | null>>;
   handleSelectedAccumulation: (isSelected: TaskTypes) => void;
@@ -34,6 +35,7 @@ const AccumulationTask = ({
   taskFor,
   isSelected,
   selectedTask,
+  borderColor,
   setSelectedTask,
   setSelectedAccumulation,
   handleSelectedAccumulation,
@@ -183,15 +185,16 @@ const AccumulationTask = ({
   }, [currentWorkspace]);
 
   return currentWorkspace ? (
-    <div className="AccumulationTaskInterface">
+    <div
+      className="AccumulationTaskInterface"
+      style={{ borderColor: borderColor }}
+    >
       <div className="ATI_InnerGrid">
         <div className="ATI_InnerGridCell Name">
           <span className="ATI_Highlight">Task: </span>{" "}
           {capitalizeString(taskFor)} <br />
           <span className="ATI_Highlight">Prof.</span>{" "}
           {currentProficiency.level} <br />
-          <span className="ATI_Highlight">EXP: </span>{" "}
-          {currentProficiency.currentXP} / {currentProficiency.requiredXP}{" "}
           <br />
         </div>
         <div className="ATI_InnerGridCell SelectChoice">
@@ -207,11 +210,7 @@ const AccumulationTask = ({
             </>
           )}
         </div>
-        <div className="ATI_InnerGridCell LoadingBar">
-          <div
-            className={`TheActualLoadingBar ${isSelected ? "" : "Unselected"}`}
-          />
-        </div>
+        <div className="ATI_InnerGridCell LoadingBar"></div>
         <div className="ATI_InnerGridCell Location">
           <span className="ATI_Highlight">Current Location</span>
           {workspaceName || "???"}

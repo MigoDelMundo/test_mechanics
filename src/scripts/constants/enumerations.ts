@@ -52,7 +52,6 @@ export enum WorkspaceNames {
   Metalcrafting = "smelter",
   Researching = "scholarium",
 }
-
 export enum WorkspaceCategoryTypes {
   Acc = "accumulation",
   Dev = "development",
@@ -81,6 +80,12 @@ export enum TaskTypes {
   Metalcrafting = "metalcrafting",
   Researching = "researching",
 }
+export enum DevelopmentTaskTypes {
+  Crafting = TaskTypes.Crafting,
+  Cooking = TaskTypes.Cooking,
+  Metalcrafting = TaskTypes.Metalcrafting,
+}
+
 export enum DamageTypes {
   // for the different damage types of WeaponProps
   Physical = "physical", // self explanatory

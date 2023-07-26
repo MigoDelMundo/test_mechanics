@@ -13,7 +13,7 @@ export const CrookDictionary: Record<string, ToolProps> = {
     description:
       "A simple crook made from the lumber you retrieved on the forest.",
     amount: 0,
-    statRequirement: { livestockTending: 0 },
+    statRequirement: { livestockTending: 1 },
     coinValue: 0,
     canUse: false,
     canDelete: true,
@@ -24,13 +24,13 @@ export const CrookDictionary: Record<string, ToolProps> = {
     bonusAttribute: {},
   },
   "09_000002": {
-    name: "Stone Crook",
+    name: "Stone-Aided Crook",
     type: ItemTypes.Tool,
-    rarity: RarityTypes.tier1,
+    rarity: RarityTypes.tier2,
     description:
-      "An axe reinforced by stone, making it more durable and powerful than it's predecessor.",
+      "A crook reinforced by stone, making it more durable and powerful than it's predecessor.",
     amount: 0,
-    statRequirement: { livestockTending: 0 },
+    statRequirement: { livestockTending: 12 },
     coinValue: 0,
     canUse: false,
     canDelete: true,

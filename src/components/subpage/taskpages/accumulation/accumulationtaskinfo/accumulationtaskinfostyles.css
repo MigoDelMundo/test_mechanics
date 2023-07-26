@@ -1,8 +1,6 @@
 .AccumulationTaskInformation {
-  border: 3px solid rgb(180, 180, 190);
   border-radius: 10px;
-  background-color: rgb(16, 16, 9);
-  grid-row: 1 / span 2;
+  grid-row: 1 / span 4;
   grid-column: 2;
   width: auto;
   height: auto;
@@ -52,7 +50,6 @@
 .TaskDivisionCell.G3 {
   border: 2px solid rgb(65, 65, 70);
   padding: 3px;
-  height: 100%;
   grid-column: span 2;
 }
 

@@ -7,16 +7,12 @@ import {
   ToolProps,
   WeaponProps,
 } from "../constants/interfaces/itemprops";
-import { ProficiencySkillProps } from "../constants/interfaces/proficiencyskillprops";
 import {
   FoodSlotProps,
   SlotProps,
   WeaponSlotProps,
 } from "../constants/interfaces/slotprops";
-import {
-  DictionaryArray,
-  DictionaryObject,
-} from "../dictionaries/dictionariesarray";
+import { DictionaryObject } from "../dictionaries/dictionariesarray";
 import { HelmetDictionary } from "../dictionaries/itemdictionaries/armordictionaries/helmetdictionary";
 import { NecklaceDictionary } from "../dictionaries/itemdictionaries/armordictionaries/necklacedictionary";
 import { CookedFoodDictionary } from "../dictionaries/itemdictionaries/productdictionary/cookedfooddictionary";
@@ -31,6 +27,7 @@ import { BasketDictionary } from "../dictionaries/itemdictionaries/tooldictionar
 import { CookingKitDictionary } from "../dictionaries/itemdictionaries/tooldictionary/cookingkitdictionary";
 import { CraftingKitDictionary } from "../dictionaries/itemdictionaries/tooldictionary/craftingkitdictionary";
 import { CrookDictionary } from "../dictionaries/itemdictionaries/tooldictionary/crookdictionary";
+import FigurineDictionary from "../dictionaries/itemdictionaries/tooldictionary/figurinedictionary";
 import { FishingRodDictionary } from "../dictionaries/itemdictionaries/tooldictionary/fishingroddictionary";
 import { HoeDictionary } from "../dictionaries/itemdictionaries/tooldictionary/hoedictionary";
 import { PickaxeDictionary } from "../dictionaries/itemdictionaries/tooldictionary/pickaxedictionary";
@@ -67,7 +64,7 @@ export const grantToolToSession = (
     craftingkit: CraftingKitDictionary,
     crook: CrookDictionary,
     fishingrod: FishingRodDictionary,
-    glasses: undefined, // TBA
+    figurine: FigurineDictionary,
     hoe: HoeDictionary,
     pickaxe: PickaxeDictionary,
     smithingkit: SmithingKitDictionary,
@@ -924,6 +921,7 @@ export const getDictionaryItemDetails = (dictionaryID: string) => {
   return certainDict[dictionaryID];
 };
 
+// unsorted
 export const findItemInBackpack = (dictionaryID: string) => {
   const sessionBackpack = sessionInventory.backpack;
   const foundSlot = sessionBackpack.find(

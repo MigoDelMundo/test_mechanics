@@ -1,10 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { stringify } from "flatted";
 
 import "./playerinventorystyles.css";
 
 import { ItemProps } from "../../../scripts/constants/interfaces/itemprops.ts";
-import { DictionaryArray } from "../../../scripts/dictionaries/dictionariesarray.tsx";
+import { DictionaryObject } from "../../../scripts/dictionaries/dictionariesarray.tsx";
 import { sessionMainSave } from "../../../scripts/player/sessionmainsave.tsx";
 
 import Tooltip from "./tooltip/tooltip.tsx";
@@ -25,6 +25,7 @@ const PlayerInventory = ({
 }: PlayerInventoryProps) => {
   // state variables
   const [showTooltip, setShowTooltip] = useState(false);
+  const [sorting, setSorting] = useState(false);
   const [tooltipContent, setTooltipContent] = useState("");
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
 
@@ -47,24 +48,38 @@ const PlayerInventory = ({
     item: ItemProps | null,
     slotPosition: number | string
   ) => {
-    if (
-      item &&
-      item.dictionaryID === (selectedSlot ? selectedSlot.dictionaryID : null)
-    ) {
-      setSelectedSlot(null);
-      setShowTooltip(true);
+    if (slotPosition === "sortButton") {
+      setSorting(true);
     } else {
-      setSelectedSlot(item ? item : null);
-      if (item !== null) {
-        setShowTooltip(false);
+      if (
+        item &&
+        item.dictionaryID === (selectedSlot ? selectedSlot.dictionaryID : null)
+      ) {
+        console.log(item.dictionaryID, selectedSlot?.dictionaryID);
+        setSelectedSlot(null);
+        setShowTooltip(true);
+      } else {
+        setSelectedSlot(item ? item : null);
+        if (item !== null) {
+          setShowTooltip(false);
+        }
       }
-      // console.log(
-      //   item
-      //     ? `${item?.name} x${item?.amount} is located at ${item?.slotPosition}`
-      //     : "Item doesn't exist."
-      // );
     }
   };
+
+  // effects
+
+  useEffect(() => {
+    // The sorting effect will be triggered whenever the `sorting` state changes
+    // You can perform the sorting logic here and update the session inventory
+    if (sorting) {
+      sessionMainSave.value.inventory.backpack = sortBackpack(
+        sessionMainSave.value.inventory.backpack
+      );
+      // Set sorting back to false after sorting
+      setSorting(false);
+    }
+  }, [sorting]);
 
   // inventory information code (separate from render code)
   const sessInventory = sessionMainSave.value.inventory;
@@ -284,20 +299,7 @@ const PlayerInventory = ({
       }
 
       const slotPosition = `BP_${i}`;
-      const itemID: string | null = sessInventory.backpack[i].dictionaryID;
       let item = sessInventory.backpack[i].item;
-
-      if (itemID) {
-        for (let c = 0; c < DictionaryArray.length; c++) {
-          if (itemID in DictionaryArray[c]) {
-            const itemDetails = DictionaryArray[c][itemID];
-            item = { ...itemDetails };
-            item.amount = sessInventory.backpack[i].amount;
-            item.slotPosition = slotPosition;
-            break;
-          }
-        }
-      }
 
       const shortenedName = item ? shortenName(item.name) : " ";
       const slotSubtype = item ? item.type : "empty";
@@ -328,7 +330,9 @@ const PlayerInventory = ({
           onClick={() => handleSlotClick(item || null, `backpackSlot${i}`)}
         >
           {`${shortenedName}`}{" "}
-          {isResource || isMaterial || isFood ? `x${item?.amount}` : ""}
+          {isResource || isMaterial || isFood
+            ? `x${sessInventory.backpack[i].amount}`
+            : ""}
         </div>
       );
     }
@@ -413,7 +417,7 @@ const PlayerInventory = ({
               <div
                 className="subgridbutton"
                 onClick={() => {
-                  sessInventory.backpack = sortBackpack(sessInventory.backpack);
+                  setSorting(true);
                 }}
               >
                 Sort

@@ -27,6 +27,7 @@ export const ForestDictionary: Record<string, WorkspaceProps> = {
     loot: {
       lootTable: [LumberDictionary["01_000001"]],
       lootChance: [100],
+      lootXP: [10],
     },
   },
 };

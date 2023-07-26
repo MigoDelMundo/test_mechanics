@@ -27,6 +27,7 @@ export const GroveDictionary: Record<string, WorkspaceProps> = {
     loot: {
       lootTable: [HerbDictionary["18_000001"]],
       lootChance: [100],
+      lootXP: [10],
     },
   },
 };

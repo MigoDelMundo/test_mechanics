@@ -5,6 +5,7 @@ import {
   WorkspaceNames,
 } from "../../../constants/enumerations";
 import { WorkspaceProps } from "../../../constants/interfaces/itemprops";
+import { CropDictionary } from "../resourcedictionaries/cropdictionary";
 
 export const FarmlandDictionary: Record<string, WorkspaceProps> = {
   "25_000001": {
@@ -23,5 +24,10 @@ export const FarmlandDictionary: Record<string, WorkspaceProps> = {
     workspaceName: WorkspaceNames.Farming,
     workspaceCategory: WorkspaceCategoryTypes.Acc,
     workspacePower: 1,
+    loot: {
+      lootTable: [CropDictionary["16_000001"]],
+      lootChance: [100],
+      lootXP: [10],
+    },
   },
 };

@@ -23,13 +23,13 @@ export const PickaxeDictionary: Record<string, ToolProps> = {
     bonusAttribute: {},
   },
   "08_000002": {
-    name: "Stone Pickaxe",
+    name: "Stone-Aided Pickaxe",
     type: ItemTypes.Tool,
-    rarity: RarityTypes.tier1,
+    rarity: RarityTypes.tier2,
     description:
       "A pickaxe reinforced by stone, making it more durable and powerful than it's predecessor.",
     amount: 0,
-    statRequirement: { mining: 0 },
+    statRequirement: { mining: 12 },
     coinValue: 0,
     canUse: false,
     canDelete: true,

@@ -30,6 +30,7 @@ export const CaveDictionary: Record<string, WorkspaceProps> = {
         MineralDictionary["02_000002"],
       ],
       lootChance: [100, 50],
+      lootXP: [10, 15],
     },
   },
   "24_000002": {
@@ -54,6 +55,7 @@ export const CaveDictionary: Record<string, WorkspaceProps> = {
         MineralDictionary["02_000003"],
       ],
       lootChance: [70, 50],
+      lootXP: [15, 20],
     },
   },
 };

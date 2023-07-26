@@ -46,7 +46,7 @@ export const CookedFoodDictionary: Record<string, FoodProps> = {
     description:
       "A salmon cooked on a fire, making it edible and giving off a lush, smoky scent. Could probably restore a few hunger points.",
     amount: 0,
-    statRequirement: { cooking: 10 },
+    statRequirement: { cooking: 5 },
     coinValue: 20,
     canUse: false,
     canDelete: true,
@@ -62,7 +62,7 @@ export const CookedFoodDictionary: Record<string, FoodProps> = {
     description:
       "Simple cooked chicken without any external flavors or spices. It's bland, but it does the job of giving you a lot of protein and fats.",
     amount: 0,
-    statRequirement: { cooking: 20 },
+    statRequirement: { cooking: 8 },
     coinValue: 30,
     canUse: false,
     canDelete: true,
@@ -78,7 +78,7 @@ export const CookedFoodDictionary: Record<string, FoodProps> = {
     description:
       "Basically a plete of 5 pieces of bread and 2 pieces of cooked salm- wait, doesn't this sound familiar?",
     amount: 0,
-    statRequirement: { cooking: 40 },
+    statRequirement: { cooking: 11 },
     coinValue: 30,
     canUse: false,
     canDelete: true,
@@ -94,7 +94,7 @@ export const CookedFoodDictionary: Record<string, FoodProps> = {
     description:
       "It's definitely cooked chicken, but the spice choices is questionable. Then again, it's better than just plain chicken.",
     amount: 0,
-    statRequirement: { cooking: 40 },
+    statRequirement: { cooking: 13 },
     coinValue: 30,
     canUse: false,
     canDelete: true,

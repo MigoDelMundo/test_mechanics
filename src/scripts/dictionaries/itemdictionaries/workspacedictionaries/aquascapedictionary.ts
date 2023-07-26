@@ -27,6 +27,7 @@ export const AquascapeDictionary: Record<string, WorkspaceProps> = {
     loot: {
       lootTable: [UnderwaterDictionary["19_000001"]],
       lootChance: [100],
+      lootXP: [10],
     },
   },
 };

@@ -5,10 +5,7 @@ import {
   WorkspaceProps,
 } from "../../../../../scripts/constants/interfaces/itemprops";
 import { DictionaryObject } from "../../../../../scripts/dictionaries/dictionariesarray";
-import {
-  findItemInBackpack,
-  getDictionaryItemDetails,
-} from "../../../../../scripts/mechanics/itemlogic";
+import { findItemInBackpack } from "../../../../../scripts/mechanics/itemlogic";
 import { sessionMainSave } from "../../../../../scripts/player/sessionmainsave";
 import "./accumulationtaskinfostyles.css";
 import React, { SetStateAction, useState, useEffect } from "react";
@@ -22,17 +19,8 @@ interface AccumulationTaskInfoProps {
 const AccumulationTaskInfo = ({
   selectedTask,
   selectedAccumulation,
-  setSelectedAccumulation,
 }: AccumulationTaskInfoProps) => {
   const [content, setContent] = useState<JSX.Element | null>(null);
-
-  const findResourceInBackpack = (dictionaryID: string) => {
-    sessionMainSave.value.inventory.backpack.map((backpackSlot) => {
-      if (backpackSlot.dictionaryID === dictionaryID) {
-        return backpackSlot;
-      }
-    });
-  };
 
   const acquiredResource = (sessionWorkspaceItem: WorkspaceProps) => {
     const acquiredResources: string[] = [];
@@ -112,12 +100,20 @@ const AccumulationTaskInfo = ({
                   sessionMainSave.value.inventory.equippedWorkspaces[taskType]
                     .item;
                 return (
-                  <>
-                    <div className="LootTableGrid">{item.name}</div>
-                    <div className="LootTableGrid">
+                  <React.Fragment key={`ResourceListNo_${index}`}>
+                    <div
+                      key={`ResourceName_${index}`}
+                      className="LootTableGrid"
+                    >
+                      {item.name}
+                    </div>
+                    <div
+                      key={`ResourceChance_${index}`}
+                      className="LootTableGrid"
+                    >
                       {lootChances ? lootChances[index] + "%" : "???"}
                     </div>
-                  </>
+                  </React.Fragment>
                 );
               })}
             </div>
@@ -153,7 +149,7 @@ const AccumulationTaskInfo = ({
         setContent(
           generateContent(
             "⛏️ Mining 🪨",
-            "Lift your axe up and slash sideways with all your might on trees to get their lumber.",
+            "Discover various rocks and minerals as you enter deeper and deeper into caves.",
             sessionWorkspaceItem.loot?.lootTable || [],
             (
               sessionWorkspace[selectedTask as keyof typeof sessionWorkspace]
@@ -182,45 +178,70 @@ const AccumulationTaskInfo = ({
         );
         break;
       case TaskTypes.Fishing:
+        sessionWorkspace = sessionMainSave.value.inventory.equippedWorkspaces;
+        sessionWorkspaceItem = sessionWorkspace[
+          selectedTask as keyof typeof sessionWorkspace
+        ].item as WorkspaceProps;
         setContent(
           generateContent(
             "🎣 Fishing 🐟",
             "Cast your fishing rod and wait for the fish to bite.",
-            [],
+            sessionWorkspaceItem.loot?.lootTable || [],
             0,
             TaskTypes.Fishing
           )
         );
         break;
       case TaskTypes.HerbGathering:
+        sessionWorkspace = sessionMainSave.value.inventory.equippedWorkspaces;
+        sessionWorkspaceItem = sessionWorkspace[
+          selectedTask as keyof typeof sessionWorkspace
+        ].item as WorkspaceProps;
         setContent(
           generateContent(
             "🌿 Herb Gathering 🌱",
             "Collect various herbs and plants.",
-            [],
-            0,
+            sessionWorkspaceItem.loot?.lootTable || [],
+            (
+              sessionWorkspace[selectedTask as keyof typeof sessionWorkspace]
+                .item as WorkspaceProps
+            ).workspacePower,
             TaskTypes.HerbGathering
           )
         );
         break;
       case TaskTypes.LivestockTending:
+        sessionWorkspace = sessionMainSave.value.inventory.equippedWorkspaces;
+        sessionWorkspaceItem = sessionWorkspace[
+          selectedTask as keyof typeof sessionWorkspace
+        ].item as WorkspaceProps;
         setContent(
           generateContent(
             "🐄 Livestock Tending 🐓",
             "Take care of your livestock and ensure their well-being.",
-            [],
-            0,
+            sessionWorkspaceItem.loot?.lootTable || [],
+            (
+              sessionWorkspace[selectedTask as keyof typeof sessionWorkspace]
+                .item as WorkspaceProps
+            ).workspacePower,
             TaskTypes.LivestockTending
           )
         );
         break;
       case TaskTypes.Farming:
+        sessionWorkspace = sessionMainSave.value.inventory.equippedWorkspaces;
+        sessionWorkspaceItem = sessionWorkspace[
+          selectedTask as keyof typeof sessionWorkspace
+        ].item as WorkspaceProps;
         setContent(
           generateContent(
             "🌾 Farming 🚜",
-            "Plant and harvest crops.",
-            [],
-            0,
+            "Plant and harvest crops which you can use for different purposes.",
+            sessionWorkspaceItem.loot?.lootTable || [],
+            (
+              sessionWorkspace[selectedTask as keyof typeof sessionWorkspace]
+                .item as WorkspaceProps
+            ).workspacePower,
             TaskTypes.Farming
           )
         );

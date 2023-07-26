@@ -27,6 +27,7 @@ export const PastureDictionary: Record<string, WorkspaceProps> = {
     loot: {
       lootTable: [LivestockDictionary["17_000001"]],
       lootChance: [100],
+      lootXP: [10],
     },
   },
 };

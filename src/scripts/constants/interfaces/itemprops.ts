@@ -66,6 +66,7 @@ export interface WorkspaceProps extends ItemProps {
   loot?: {
     lootTable?: ResourceProps[];
     lootChance?: number[];
+    lootXP?: number[];
   };
 }
 

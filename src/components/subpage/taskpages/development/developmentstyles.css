@@ -1,17 +1,131 @@
 .DevelopmentMain {
-  width: 100%;
+  width: 900px;
   user-select: none;
+  margin-bottom: 80px;
 }
 
 .DevelopmentTitleHeader {
-  width: 100%;
+  width: 900px;
   text-align: center;
   color: rgb(15, 220, 128);
 }
 
 .DevelopmentSubtitle {
+  width: 900px;
   font-style: italic;
   color: rgb(108, 108, 110);
   font-size: 13px;
-  width: 50%;
+  margin-bottom: 20px;
+}
+
+.DevelopmentGrid {
+  width: 900px;
+  height: 400px;
+  display: grid;
+  grid-template-columns: 600px 300px;
+  grid-template-rows: 400px;
+}
+
+.ItemListGrid {
+  border: 3px solid rgb(40, 40, 42);
+  background-color: rgb(20, 20, 22);
+  border-radius: 10px;
+  display: grid;
+  margin: 0 5px 0;
+  margin-right: 15px;
+  padding: 10px;
+  grid-template-columns: repeat(11, 50px);
+  grid-auto-rows: 50px;
+  transition: border-color 0.5s, background-color 0.5s;
+}
+
+.ItemToCraft {
+  background-color: rgb(15, 15, 20);
+  border: 2px solid rgb(54, 54, 54);
+}
+
+.ItemToCraft.default {
+  background-color: transparent;
+  border-color: transparent;
+  grid-column: span 11;
+  font-style: italic;
+  color: rgb(84, 84, 94);
+  font-size: 11px;
+}
+
+.DevelopmentGridCell.Right {
+  padding: 10px;
+  background-color: rgb(20, 20, 22);
+  border: 3px solid rgb(180, 180, 190);
+  border-radius: 10px;
+}
+
+.DevelopmentTaskList {
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 10px;
+  padding: 5px;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.DevelopmentTaskTab {
+  display: block;
+  border: 3px solid white;
+  border-radius: 10px;
+  width: calc(90%-20px);
+  padding: 5px;
+}
+
+.DevelopmentTaskTab:hover {
+  cursor: pointer;
+}
+
+.DevelopmentTaskTab.Crafting {
+  border-color: rgb(180, 91, 27);
+  color: rgb(180, 91, 27);
+  transition: background-color 0.2s;
+}
+
+.DevelopmentTaskTab.Cooking {
+  border-color: rgb(255, 165, 0);
+  color: rgb(255, 165, 0);
+  transition: background-color 0.2s;
+}
+
+.DevelopmentTaskTab.Metalcrafting {
+  border-color: rgb(170, 170, 170);
+  color: rgb(170, 170, 170);
+  transition: background-color 0.2s;
+}
+
+.DevelopmentTaskTab.Crafting:hover {
+  background-color: rgb(52, 26, 5);
+}
+
+.DevelopmentTaskTab.Cooking:hover {
+  background-color: rgb(99, 64, 0);
+}
+
+.DevelopmentTaskTab.Metalcrafting:hover {
+  background-color: rgb(79, 79, 79);
+}
+
+.ItemListGrid.Crafting {
+  background-color: rgb(52, 26, 5);
+  border-color: rgb(180, 91, 27);
+  transition: border-color 0.5s, background-color 0.5s;
+}
+
+.ItemListGrid.Cooking {
+  border-color: rgb(255, 165, 0);
+  background-color: rgb(99, 64, 0);
+  transition: border-color 0.5s, background-color 0.5s;
+}
+
+.ItemListGrid.Metalcrafting {
+  border-color: rgb(170, 170, 170);
+  background-color: rgb(79, 79, 79);
+  transition: border-color 0.5s, background-color 0.5s;
 }

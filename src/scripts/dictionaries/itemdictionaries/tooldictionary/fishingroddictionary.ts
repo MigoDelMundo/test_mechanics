@@ -13,7 +13,7 @@ export const FishingRodDictionary: Record<string, ToolProps> = {
     description:
       "A simple fishing rod made from the lumber you retrieved on the forest. ",
     amount: 0,
-    statRequirement: { fishing: 0 },
+    statRequirement: { fishing: 1 },
     coinValue: 0,
     canUse: false,
     canDelete: true,
@@ -24,13 +24,13 @@ export const FishingRodDictionary: Record<string, ToolProps> = {
     bonusAttribute: {},
   },
   "10_000002": {
-    name: "Wooden Fishing Rod",
+    name: "Stone-Aided Fishing Rod",
     type: ItemTypes.Tool,
-    rarity: RarityTypes.tier1,
+    rarity: RarityTypes.tier2,
     description:
       "A fishing rod reinforced by stone, making it more durable and powerful than it's predecessor. ",
     amount: 0,
-    statRequirement: { fishing: 0 },
+    statRequirement: { fishing: 12 },
     coinValue: 0,
     canUse: false,
     canDelete: true,
